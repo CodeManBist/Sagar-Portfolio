@@ -6,6 +6,7 @@ import Features from '../components/Features'
 import FeaturedWork from '../components/FeaturedWork'
 import Services from '../components/Services'
 import CTA from '../components/CTA'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <FeaturedWork />
         <Services />
         <CTA />
+        <Footer />
     </>
   )
 }
