@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from "../components/common/Navbar"
 
-const Work = () => {
+const Services = () => {
   return (
     <>
-        <Navbar />
+      <Navbar />
     </>
   )
 }
 
-export default Work
+export default Services
