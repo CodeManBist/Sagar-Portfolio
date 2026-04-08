@@ -21,7 +21,7 @@ const MoreProjects = () => {
   ];
 
   return (
-    <section className="page-section bg-indigo-50">
+    <section id="more-projects" className="page-section bg-indigo-50">
 
       <div className="section-wrap">
 

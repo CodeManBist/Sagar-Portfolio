@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ActionButton from "../ui/ActionButton";
 
 const Hero = () => {
@@ -40,7 +41,7 @@ const Hero = () => {
           </ActionButton>
 
           {/* Secondary Button */}
-          <ActionButton as="a" href="/work" variant="secondary" className="px-8 py-4 text-center">
+          <ActionButton as={Link} to="/project" variant="secondary" className="px-8 py-4 text-center">
             View Work
           </ActionButton>
         </div>

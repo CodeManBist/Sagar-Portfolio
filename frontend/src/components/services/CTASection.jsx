@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CTASection = () => {
   return (
     <section className="page-section page-section-muted">
@@ -30,13 +32,19 @@ const CTASection = () => {
           {/* Buttons */}
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
 
-            <button className="action-button bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-lg hover:opacity-90">
+            <Link
+              to="/contact#contact-form"
+              className="action-button bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-lg hover:opacity-90"
+            >
               Start Your Project
-            </button>
+            </Link>
 
-            <button className="action-button border border-white/10 bg-white/5 text-white hover:bg-white/10">
+            <Link
+              to="/contact#contact-form"
+              className="action-button border border-white/10 bg-white/5 text-white hover:bg-white/10"
+            >
               Book a Consultation
-            </button>
+            </Link>
 
           </div>
 

@@ -5,7 +5,7 @@ import ContactForm from "./ContactForm";
 
 const ContactSection = () => {
   return (
-    <section className="page-section page-section-muted">
+    <section id="contact-form" className="page-section page-section-muted">
 
       <div className="section-wrap grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-16">
 

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const plans = [
   {
     title: "THE MVP",
@@ -105,7 +107,8 @@ const PricingSection = () => {
             </ul>
 
             {/* Button */}
-            <button
+            <Link
+              to="/contact#contact-form"
               className={`action-button mt-6 w-full ${
                 plan.highlight
                   ? "bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-md hover:opacity-90"
@@ -113,7 +116,7 @@ const PricingSection = () => {
               }`}
             >
               {plan.button}
-            </button>
+            </Link>
 
           </div>
         ))}

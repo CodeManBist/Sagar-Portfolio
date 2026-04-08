@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ProjectCTA = () => {
   return (
     <section className="page-section page-section-muted text-center">
@@ -18,14 +20,17 @@ const ProjectCTA = () => {
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
 
           {/* Primary */}
-          <button className="action-button bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-md hover:opacity-90">
+          <Link
+            to="/contact"
+            className="action-button bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-md hover:opacity-90"
+          >
             Start Project
-          </button>
+          </Link>
 
           {/* Secondary */}
-          <button className="action-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200">
+          <a href="#more-projects" className="action-button bg-indigo-100 text-indigo-700 hover:bg-indigo-200">
             View More Work
-          </button>
+          </a>
 
         </div>
 
