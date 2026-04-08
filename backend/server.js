@@ -3,6 +3,8 @@ import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3001;
+const DUPLICATE_WINDOW_MS = 10000;
+let lastSubmission = { signature: "", timestamp: 0 };
 
 app.use(cors());
 app.use(express.json());
@@ -27,9 +29,27 @@ app.post("/api/contact", (request, response) => {
     receivedAt: new Date().toISOString(),
   };
 
-  console.log("Contact submission received:", submission);
+  const signature = JSON.stringify({
+    name: submission.name,
+    email: submission.email,
+    message: submission.message,
+  });
+  const now = Date.now();
+
+  if (signature === lastSubmission.signature && now - lastSubmission.timestamp < DUPLICATE_WINDOW_MS) {
+    return response.status(202).json({
+      duplicate: true,
+      message: "Duplicate submission ignored.",
+    });
+  }
+
+  lastSubmission = {
+    signature,
+    timestamp: now,
+  };
 
   return response.status(201).json({
+    duplicate: false,
     message: "Thanks. Your message has been received.",
   });
 });

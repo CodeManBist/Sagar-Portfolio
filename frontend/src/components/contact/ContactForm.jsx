@@ -1,6 +1,6 @@
 import { Calendar, MessageCircle } from "lucide-react";
-import { useState } from "react";
-import { DISCOVERY_CALL_URL, WHATSAPP_URL } from "../../config/links";
+import { useRef, useState } from "react";
+import { DISCOVERY_CALL_URL, WHATSAPP_URL, buildWhatsAppLeadUrl } from "../../config/links";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,8 @@ const ContactForm = () => {
   });
   const [status, setStatus] = useState({ type: "idle", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const lastForwardRef = useRef({ signature: "", timestamp: 0 });
+  const submitLockRef = useRef(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,8 +23,19 @@ const ContactForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (isSubmitting || submitLockRef.current) {
+      return;
+    }
+
+    submitLockRef.current = true;
     setIsSubmitting(true);
     setStatus({ type: "idle", message: "" });
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      message: formData.message.trim(),
+    };
 
     try {
       const response = await fetch("/api/contact", {
@@ -30,13 +43,21 @@ const ContactForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
 
       if (!response.ok) {
         throw new Error(result.message || "Failed to send message");
+      }
+
+      if (result.duplicate) {
+        setStatus({
+          type: "success",
+          message: "Duplicate submission ignored. WhatsApp was not opened again.",
+        });
+        return;
       }
 
       setFormData({
@@ -48,6 +69,25 @@ const ContactForm = () => {
         type: "success",
         message: result.message || "Thanks. I’ll get back to you soon.",
       });
+
+      const signature = JSON.stringify(payload);
+      const now = Date.now();
+      const isDuplicateForward =
+        lastForwardRef.current.signature === signature && now - lastForwardRef.current.timestamp < 10000;
+
+      if (!isDuplicateForward) {
+        lastForwardRef.current = { signature, timestamp: now };
+        const whatsappForwardUrl = buildWhatsAppLeadUrl(payload);
+        const popup = window.open(whatsappForwardUrl, "_blank", "noopener,noreferrer");
+
+        if (!popup) {
+          setStatus({
+            type: "success",
+            message:
+              "Thanks. Message received. WhatsApp could not open in a new tab (popup blocked). Please use the WhatsApp link below.",
+          });
+        }
+      }
     } catch (error) {
       setStatus({
         type: "error",
@@ -55,6 +95,7 @@ const ContactForm = () => {
       });
     } finally {
       setIsSubmitting(false);
+      submitLockRef.current = false;
     }
   };
 
