@@ -1,40 +1,40 @@
 const CTASection = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20">
+    <section className="page-section page-section-muted">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="section-wrap">
 
         <div className="relative rounded-3xl p-10 md:p-16 text-center overflow-hidden
-          bg-gradient-to-br from-[#0B0F2A] via-[#0A0E24] to-[#0B0F2A] shadow-xl">
+          bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 shadow-xl">
 
           {/* Badge */}
           <div className="mb-6">
-            <span className="text-[10px] tracking-widest text-[#A5B4FC] bg-white/5 px-4 py-1 rounded-full">
+            <span className="rounded-full bg-white/5 px-4 py-1 text-[10px] tracking-[0.28em] text-indigo-200">
               READY TO SHIP
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto">
+          <h2 className="mx-auto max-w-3xl text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
             Ready to scale your{" "}
-            <span className="bg-gradient-to-r from-[#6366F1] to-[#4F46E5] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-indigo-400 to-indigo-300 bg-clip-text text-transparent">
               technical infrastructure?
             </span>
           </h2>
 
           {/* Description */}
-          <p className="mt-6 text-[#94A3B8] text-base md:text-lg max-w-xl mx-auto leading-[28px]">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-300 md:text-lg">
             Stop dealing with technical debt. Let's build a clean, high-performance foundation for your business growth today.
           </p>
 
           {/* Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
 
-            <button className="bg-gradient-to-r from-[#4F46E5] to-[#6366F1] text-white px-6 py-3 rounded-md text-sm font-medium shadow-lg hover:opacity-90 transition">
+            <button className="action-button bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-lg hover:opacity-90">
               Start Your Project
             </button>
 
-            <button className="bg-white/5 text-white px-6 py-3 rounded-md text-sm font-medium border border-white/10 hover:bg-white/10 transition">
+            <button className="action-button border border-white/10 bg-white/5 text-white hover:bg-white/10">
               Book a Consultation
             </button>
 

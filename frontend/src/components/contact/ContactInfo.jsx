@@ -7,8 +7,8 @@ const ContactInfo = () => {
         className="w-12 h-12 rounded-full object-cover"
       />
       <div>
-        <h4 className="text-[#001C37] font-semibold">Sagar Clarity</h4>
-        <p className="text-sm text-[#464555]">
+        <h4 className="font-semibold text-slate-900">Sagar Clarity</h4>
+        <p className="text-sm text-slate-600">
           Design Partner & Product Strategist
         </p>
       </div>

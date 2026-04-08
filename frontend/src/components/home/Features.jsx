@@ -1,5 +1,6 @@
 import FeatureCard from "./FeatureCard";
 import { Zap, Pencil, TrendingUp, Database } from "lucide-react";
+import SectionHeading from "../ui/SectionHeading";
 
 const Features = () => {
   const data = [
@@ -26,9 +27,16 @@ const Features = () => {
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-16 px-6 md:px-12 lg:px-20">
-      
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="page-section page-section-muted">
+      <div className="section-wrap mb-10">
+        <SectionHeading
+          eyebrow="Why it works"
+          title="Features built for outcomes"
+          description="A consistent product language keeps the portfolio focused on clarity, conversion, and maintainability."
+        />
+      </div>
+
+      <div className="section-wrap grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {data.map((item, index) => (
           <FeatureCard
             key={index}

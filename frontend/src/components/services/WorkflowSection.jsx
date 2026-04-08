@@ -18,39 +18,39 @@ const workflow = [
 
 const WorkflowSection = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20 text-center">
+    <section className="page-section page-section-muted text-center">
 
       {/* Top Label */}
-      <p className="text-xs tracking-[3px] text-[#6366F1] font-semibold mb-4">
+      <p className="mb-4 text-xs font-semibold tracking-[0.22em] text-indigo-600">
         THE WORKFLOW
       </p>
 
       {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-12">
+      <h2 className="mb-12 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
         From logic to launch
       </h2>
 
       {/* Cards */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      <div className="section-wrap grid gap-6 md:grid-cols-3">
 
         {workflow.map((item, index) => (
           <div
             key={index}
-            className="relative bg-white border border-[#E2E8F0] rounded-2xl p-6 text-left hover:shadow-md transition"
+            className="surface-card relative p-6 text-left transition hover:shadow-md"
           >
 
             {/* Step Number (faded background) */}
-            <span className="absolute top-4 right-6 text-4xl font-bold text-[#E2E8F0]">
+            <span className="absolute right-6 top-4 text-4xl font-bold text-slate-200">
               {item.step}
             </span>
 
             {/* Title */}
-            <h3 className="text-base font-semibold text-[#0F172A]">
+            <h3 className="text-base font-semibold text-slate-900">
               {item.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[24px] max-w-xs">
+            <p className="section-lead mt-3 max-w-xs text-sm leading-6">
               {item.desc}
             </p>
 

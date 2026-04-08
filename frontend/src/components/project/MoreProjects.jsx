@@ -21,16 +21,16 @@ const MoreProjects = () => {
   ];
 
   return (
-    <section className="bg-[#f0f4ff] px-6 md:px-12 lg:px-20 py-16">
+    <section className="page-section bg-indigo-50">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="section-wrap">
 
         {/* Heading */}
-        <h2 className="text-lg sm:text-xl font-bold text-[#001C37]">
+        <h2 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
           More Projects
         </h2>
 
-        <p className="text-sm text-[#464555] mt-2 mb-8">
+        <p className="section-lead mt-2 mb-8 text-sm">
           Exploring other technical solutions and architectures.
         </p>
 
@@ -40,7 +40,7 @@ const MoreProjects = () => {
           {projects.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition"
+              className="surface-card overflow-hidden transition hover:shadow-md"
             >
 
               {/* Image */}
@@ -56,22 +56,22 @@ const MoreProjects = () => {
               <div className="p-4">
 
                 {/* Tag */}
-                <span className="text-[10px] bg-[#EEF2FF] text-[#493EE5] px-2 py-1 rounded-full">
+                <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] text-indigo-600">
                   {item.tag}
                 </span>
 
                 {/* Title */}
-                <h3 className="mt-3 text-sm font-semibold text-[#0F172A]">
+                <h3 className="mt-3 text-sm font-semibold text-slate-900">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 text-xs text-[#64748B] leading-[20px]">
+                <p className="mt-2 text-xs leading-5 text-slate-600">
                   {item.desc}
                 </p>
 
                 {/* Link */}
-                <p className="mt-3 text-xs text-[#4F46E5] font-medium cursor-pointer hover:underline">
+                <p className="mt-3 cursor-pointer text-xs font-medium text-indigo-600 hover:underline">
                   View Case Study →
                 </p>
 

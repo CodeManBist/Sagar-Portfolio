@@ -2,47 +2,47 @@
 
 const ProjectHero = () => {
   return (
-    <section className="px-6 md:px-12 lg:px-20 py-16">
-      <div className="max-w-5xl mx-auto">
+    <section className="page-section py-16">
+      <div className="section-wrap max-w-5xl">
 
-        <h1 className="text-[60px] sm:text-4xl md:text-5xl font-extrabold text-[#001C37] leading-tight">
+        <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl">
           Fintech Wealth Dashboard
         </h1>
 
-        <p className="mt-4 text-[#464555] text-[20px]">
+        <p className="section-lead mt-4 text-lg md:text-xl">
           A high-performance wealth management interface designed for real-time asset tracking and institutional-grade portfolio analytics.
         </p>
-        <hr className="my-6 border-t border-[#E2E8F0]" />
+        <hr className="my-6 border-t border-slate-200" />
 
         {/* Meta */}
-        <div className="mt-8 grid grid-cols-3 gap-8 text-[#475569]">
+        <div className="mt-8 grid grid-cols-3 gap-8 text-slate-600">
 
         {/* ROLE */}
         <div>
-          <p className="text-[10px] sm:text-xs text-[#493EE5] font-semibold tracking-wide uppercase">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo-600 sm:text-xs">
             ROLE
           </p>
-          <p className="mt-1 text-semibold text-[14px] text-[#001C37]">
+          <p className="mt-1 text-[14px] font-semibold text-slate-900">
             Full Stack Developer
           </p>
         </div>
 
         {/* DURATION */}
         <div>
-          <p className="text-[10px] sm:text-xs text-[#493EE5] font-semibold tracking-wide uppercase">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo-600 sm:text-xs">
             DURATION
           </p>
-          <p className="mt-1 text-semibold text-[14px] text-[#001C37]">
+          <p className="mt-1 text-[14px] font-semibold text-slate-900">
             3 Months
           </p>
         </div>
 
          {/* STACK */}
          <div>
-           <p className="text-[10px] sm:text-xs text-[#493EE5] font-semibold tracking-wide uppercase">
+           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-indigo-600 sm:text-xs">
              STACK
            </p>
-           <p className="mt-1 text-semibold text-[14px] text-[#001C37]">
+           <p className="mt-1 text-[14px] font-semibold text-slate-900">
              MongoDB, Express, React, Node
            </p>
           </div>

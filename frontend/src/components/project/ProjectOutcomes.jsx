@@ -20,23 +20,23 @@ const ProjectOutcomes = () => {
   ];
 
   return (
-    <section className="bg-[#05233B] px-6 md:px-12 lg:px-20 py-16">
+    <section className="page-section bg-slate-950">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="section-wrap">
 
         {/* Heading */}
-        <h2 className="text-lg sm:text-xl font-semibold text-white mb-10">
+        <h2 className="mb-10 text-lg font-semibold tracking-tight text-white sm:text-xl">
           Measurable Outcomes
         </h2>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+        <div className="grid grid-cols-1 divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
 
           {data.map((item, i) => (
             <div key={i} className="py-6 sm:px-6">
 
               {/* Icon */}
-              <div className="text-[#A5B4FC] mb-4">
+              <div className="mb-4 text-indigo-300">
                 {item.icon}
               </div>
 
@@ -46,7 +46,7 @@ const ProjectOutcomes = () => {
               </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm text-[#94A3B8] leading-[22px] max-w-xs">
+              <p className="mt-2 max-w-xs text-sm leading-6 text-slate-400">
                 {item.desc}
               </p>
 

@@ -1,4 +1,5 @@
 import ProjectCard from "./ProjectCard";
+import SectionHeading from "../ui/SectionHeading";
 
 const FeaturedWork = () => {
   const projects = [
@@ -19,27 +20,21 @@ const FeaturedWork = () => {
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-16 px-6 md:px-12 lg:px-20">
-      
-      <div className="max-w-6xl mx-auto">
-
-        {/* Heading */}
-        <div className="mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A]">
-            Featured Work
-          </h2>
-          <p className="text-[#64748B] mt-2">
-            Real projects designed to deliver results.
-          </p>
-        </div>
+    <section className="page-section page-section-muted">
+      <div className="section-wrap">
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Featured projects"
+          description="A few representative builds, all presented with the same hierarchy and language."
+          className="mb-10"
+        />
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
           ))}
         </div>
-
       </div>
     </section>
   );

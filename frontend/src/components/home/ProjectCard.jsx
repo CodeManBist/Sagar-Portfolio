@@ -12,12 +12,12 @@ const ProjectCard = ({ image, title, description, tech }) => {
       </div>
 
       {/* Title */}
-      <h3 className="text-[18px] font-semibold text-[#0F172A] mb-2">
+      <h3 className="mb-2 text-[18px] font-semibold text-slate-900">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="text-[#64748B] text-sm mb-3">
+      <p className="mb-3 text-sm text-slate-600">
         {description}
       </p>
 
@@ -26,7 +26,7 @@ const ProjectCard = ({ image, title, description, tech }) => {
         {tech.map((item, index) => (
           <span
             key={index}
-            className="text-xs bg-[#E2E8F0] text-[#475569] px-2 py-1 rounded-full"
+            className="rounded-full bg-slate-200 px-2 py-1 text-xs text-slate-600"
           >
             {item}
           </span>

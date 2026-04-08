@@ -1,5 +1,6 @@
 import ServiceCard from "./ServiceCard";
 import { Layout, Rocket, BarChart, Server } from "lucide-react";
+import SectionHeading from "../ui/SectionHeading";
 
 const Services = () => {
   const services = [
@@ -30,22 +31,21 @@ const Services = () => {
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-16 px-6 md:px-12 lg:px-20">
-      
-      <div className="max-w-6xl mx-auto">
+    <section className="page-section page-section-muted">
+      <div className="section-wrap">
+        <SectionHeading
+          eyebrow="Core offer"
+          title="Services that keep the stack lean"
+          description="Each service page should read from the same system so the portfolio feels deliberate instead of assembled section by section."
+          align="center"
+          className="mb-10"
+        />
 
-        {/* Heading */}
-        <h2 className="text-center text-2xl md:text-3xl font-bold text-[#0F172A] mb-10">
-          Core Services
-        </h2>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((item, index) => (
             <ServiceCard key={index} {...item} />
           ))}
         </div>
-
       </div>
 
     </section>

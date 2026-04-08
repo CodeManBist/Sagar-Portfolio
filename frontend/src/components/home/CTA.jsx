@@ -1,27 +1,24 @@
 const CTA = () => {
   return (
-    <section className="px-6 md:px-12 lg:px-20 py-16 bg-[#F8FAFC]">
+    <section className="page-section page-section-muted">
       
-      <div className="max-w-6xl mx-auto">
+      <div className="section-wrap">
         
-        <div className="bg-gradient-to-r from-[#4F46E5] to-[#6366F1] rounded-2xl text-center px-6 md:px-12 py-12 md:py-16">
+        <div className="rounded-2xl bg-gradient-to-r from-indigo-600 to-indigo-500 px-6 py-12 text-center md:px-12 md:py-16">
           
           {/* Heading */}
-          <h2 className="text-white text-2xl md:text-4xl font-bold leading-tight max-w-3xl mx-auto">
+          <h2 className="mx-auto max-w-3xl text-2xl font-bold leading-tight text-white md:text-4xl">
             Let’s build something that brings you more customers
           </h2>
 
           {/* Description */}
-          <p className="text-indigo-100 mt-4 max-w-2xl mx-auto">
+          <p className="mx-auto mt-4 max-w-2xl text-indigo-100">
             Discuss how we can scale your business with modern web technologies and real results.
           </p>
 
           {/* Button */}
           <div className="mt-8">
-            <a
-              href="/contact"
-              className="bg-white text-[#4F46E5] px-6 py-3 rounded-md text-sm font-medium shadow hover:bg-gray-100 transition"
-            >
+            <a href="/contact" className="action-button bg-white text-indigo-700 hover:bg-slate-100">
               Start Your Project
             </a>
           </div>

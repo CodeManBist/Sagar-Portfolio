@@ -9,23 +9,23 @@ const Navbar = () => {
   const paths = ["/", "/project", "/services", "/contact"];
 
   return (
-    <header className="h-[4.5rem] flex items-center justify-between px-6 md:px-8 sticky top-0 z-50 bg-[#FDFEFF]">
+    <header className="sticky top-0 z-50 flex h-18 items-center justify-between border-b border-slate-200/70 bg-white/90 px-6 md:px-8 backdrop-blur-md">
 
       {/* Logo */}
-      <h1 className="text-[18px] font-semibold text-[#0F172A] z-50">
+      <h1 className="z-50 text-[18px] font-bold tracking-tight text-slate-900">
         <Link to="/">Sagar Clarity</Link>
       </h1>
 
       {/* Desktop Nav */}
       <nav className="hidden md:block">
-        <ul className="flex items-center text-[15px] text-[#475569]">
+        <ul className="flex items-center text-[15px] text-slate-600">
           {navItems.map((item, i) => (
             <li key={item} className="px-2">
               <Link
                 to={paths[i]}
-                className="relative inline-block py-1 hover:text-[#4F46E5] transition
+                className="relative inline-block py-1 transition hover:text-indigo-600
                 after:content-[''] after:absolute after:left-0 after:bottom-0
-                after:h-[2px] after:w-0 after:bg-[#4F46E5]
+                after:h-0.5 after:w-0 after:bg-indigo-600
                 after:transition-all after:duration-300 after:ease-in-out
                 hover:after:w-full"
               >
@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="hidden md:block">
         <Link
           to="/contact"
-          className="bg-[#493EE5] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition"
+          className="action-button action-button-primary"
         >
           Hire Me
         </Link>
@@ -56,20 +56,20 @@ const Navbar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-[4.5rem] left-0 h-[calc(100vh-4.5rem)] w-[70%] bg-[#FDFEFF] shadow-md transform transition-transform duration-300 ${
+        className={`fixed top-18 left-0 h-[calc(100vh-4.5rem)] w-[70%] border-r border-slate-200 bg-white shadow-xl transform transition-transform duration-300 ${
           open ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
-        <ul className="flex flex-col items-start px-6 py-6 text-[15px] text-[#475569]">
+        <ul className="flex flex-col items-start px-6 py-6 text-[15px] text-slate-600">
 
           {navItems.map((item, i) => (
             <li key={item} className="w-full py-3">
               <Link
                 to={paths[i]}
                 onClick={() => setOpen(false)}
-                className="relative inline-block hover:text-[#4F46E5] transition
+                className="relative inline-block transition hover:text-indigo-600
                 after:content-[''] after:absolute after:left-0 after:bottom-0
-                after:h-[2px] after:w-0 after:bg-[#4F46E5]
+                after:h-0.5 after:w-0 after:bg-indigo-600
                 after:transition-all after:duration-300 after:ease-in-out
                 hover:after:w-full"
               >
@@ -83,7 +83,7 @@ const Navbar = () => {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="block bg-[#493EE5] text-white px-6 py-2 rounded-md text-sm text-center"
+              className="action-button action-button-primary block w-full text-center"
             >
               Hire Me
             </Link>

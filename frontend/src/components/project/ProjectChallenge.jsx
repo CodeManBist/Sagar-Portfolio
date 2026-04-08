@@ -20,16 +20,16 @@ const ProjectChallenge = () => {
   ]; 
 
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-16">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+    <section className="page-section page-section-muted">
+      <div className="section-wrap grid items-start gap-12 lg:grid-cols-2">
 
         {/* LEFT CONTENT */}
         <div>
-          <h2 className="text-[30px] font-semibold text-[#001C37] mb-4">
+          <h2 className="mb-4 text-[30px] font-semibold tracking-tight text-slate-900">
             The Challenge
           </h2>
 
-          <p className="text-[#464555] text-[16px] leading-[26px] max-w-md">
+          <p className="section-lead max-w-md text-[16px] leading-7">
             The client required a unified platform to replace fragmented legacy systems.
             The primary hurdle was synchronizing massive datasets across multiple international markets
             without compromising on sub-second UI responsiveness.
@@ -42,19 +42,19 @@ const ProjectChallenge = () => {
           {challenges.map((item, i) => (
             <div
               key={i}
-              className="flex items-start gap-3 bg-white border border-[#E2E8F0] rounded-xl px-4 py-3 shadow-sm"
+                className="surface-card flex items-start gap-3 px-4 py-3 shadow-sm"
             >
               {/* ICON */}
-              <div className="text-[#4F46E5] mt-1">
+                <div className="mt-1 text-indigo-600">
                 {item.icon}
               </div>
 
               {/* TEXT */}
               <div>
-                <h3 className="font-semibold text-[14px] text-[#001C37]">
+                  <h3 className="text-[14px] font-semibold text-slate-900">
                   {item.title}
                 </h3>
-                <p className="text-[14px] text-[#464555] leading-[22px]">
+                  <p className="text-[14px] leading-6 text-slate-600">
                   {item.desc}
                 </p>
               </div>

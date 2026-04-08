@@ -49,40 +49,40 @@ const services = [
 
 const ServicesGrid = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+    <section className="page-section page-section-muted">
+      <div className="section-wrap grid gap-8 md:grid-cols-2">
 
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-white border border-[#E2E8F0] rounded-2xl p-6 md:p-8 hover:shadow-lg transition"
+            className="surface-card p-6 transition hover:shadow-lg md:p-8"
           >
 
             {/* Icon */}
-            <div className="w-10 h-10 flex items-center justify-center bg-[#EEF2FF] text-[#4F46E5] rounded-md mb-4">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
               {service.icon}
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-semibold text-[#0F172A]">
+            <h3 className="text-lg font-semibold text-slate-900">
               {service.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[24px]">
+            <p className="section-lead mt-3 text-sm leading-6">
               {service.desc}
             </p>
 
             {/* Benefits */}
-            <div className="mt-5 bg-[#F1F5F9] rounded-xl p-4">
-              <p className="text-xs font-semibold text-[#4F46E5] mb-3">
+            <div className="mt-5 rounded-xl bg-slate-100 p-4">
+              <p className="mb-3 text-xs font-semibold text-indigo-600">
                 KEY BENEFITS
               </p>
 
-              <ul className="space-y-2 text-sm text-[#475569]">
+              <ul className="space-y-2 text-sm text-slate-600">
                 {service.benefits.map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#4F46E5]">•</span>
+                    <span className="text-indigo-600">•</span>
                     {item}
                   </li>
                 ))}
@@ -91,7 +91,7 @@ const ServicesGrid = () => {
 
             {/* Tags */}
             <div className="mt-5">
-              <p className="text-[10px] text-[#94A3B8] mb-2 tracking-wide">
+              <p className="mb-2 text-[10px] tracking-[0.2em] text-slate-400">
                 WHAT YOU GET
               </p>
 
@@ -99,7 +99,7 @@ const ServicesGrid = () => {
                 {service.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-[10px] bg-[#EEF2FF] text-[#4F46E5] px-3 py-1 rounded-full"
+                    className="rounded-full bg-indigo-50 px-3 py-1 text-[10px] text-indigo-600"
                   >
                     {tag}
                   </span>

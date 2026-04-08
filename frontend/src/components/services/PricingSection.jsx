@@ -39,66 +39,66 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20">
+    <section className="page-section page-section-muted">
 
       {/* Top */}
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+      <div className="section-wrap mb-12 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
 
         <div>
-          <p className="text-xs tracking-[3px] text-[#6366F1] font-semibold mb-2">
+          <p className="mb-2 text-xs font-semibold tracking-[0.22em] text-indigo-600">
             PRICING
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A]">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
             Value-led investment models
           </h2>
         </div>
 
-        <p className="text-sm text-[#64748B] max-w-md">
+        <p className="section-lead max-w-md text-sm">
           All projects include comprehensive documentation, 30 days of post-launch support, and full source code ownership.
         </p>
 
       </div>
 
       {/* Cards */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      <div className="section-wrap grid gap-6 md:grid-cols-3">
 
         {plans.map((plan, index) => (
           <div
             key={index}
             className={`relative rounded-2xl p-6 md:p-8 border transition-all ${
               plan.highlight
-                ? "bg-white border-[#6366F1] shadow-lg scale-[1.03]"
-                : "bg-white border-[#E2E8F0]"
+                ? "surface-card border-indigo-200 shadow-lg scale-[1.03]"
+                : "surface-card border-slate-200"
             }`}
           >
 
             {/* Badge */}
             {plan.highlight && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] bg-[#6366F1] text-white px-3 py-1 rounded-full">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-600 px-3 py-1 text-[10px] text-white">
                 MOST REQUESTED
               </span>
             )}
 
             {/* Title */}
-            <p className="text-xs text-[#94A3B8] mb-2">
+            <p className="mb-2 text-xs tracking-[0.18em] text-slate-400">
               {plan.title}
             </p>
 
             {/* Price */}
-            <h3 className="text-2xl font-bold text-[#4F46E5]">
+            <h3 className="text-2xl font-bold text-indigo-600">
               {plan.price}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[22px]">
+            <p className="section-lead mt-3 text-sm leading-6">
               {plan.desc}
             </p>
 
             {/* Features */}
-            <ul className="mt-5 space-y-3 text-sm text-[#475569]">
+            <ul className="mt-5 space-y-3 text-sm text-slate-600">
               {plan.features.map((item, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <span className="text-[#4F46E5]">✔</span>
+                  <span className="text-indigo-600">✔</span>
                   {item}
                 </li>
               ))}
@@ -106,10 +106,10 @@ const PricingSection = () => {
 
             {/* Button */}
             <button
-              className={`mt-6 w-full py-2 rounded-md text-sm font-medium transition ${
+              className={`action-button mt-6 w-full ${
                 plan.highlight
-                  ? "bg-gradient-to-r from-[#4F46E5] to-[#6366F1] text-white shadow-md hover:opacity-90"
-                  : "border border-[#6366F1] text-[#4F46E5] hover:bg-[#EEF2FF]"
+                  ? "bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-md hover:opacity-90"
+                  : "border border-indigo-200 text-indigo-700 hover:bg-indigo-50"
               }`}
             >
               {plan.button}

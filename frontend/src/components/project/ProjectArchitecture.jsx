@@ -20,34 +20,34 @@ const ProjectArchitecture = () => {
   ];
 
   return (
-    <section className="px-6 md:px-12 lg:px-20 py-16 text-center">
+    <section className="page-section text-center">
 
       {/* Heading */}
-      <h2 className="text-xl sm:text-2xl font-semibold text-[#001C37] mb-12">
+      <h2 className="mb-12 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
         The Architecture
       </h2>
 
       {/* Cards */}
-      <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="section-wrap grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
         {items.map((item, i) => (
           <div
             key={i}
-            className="bg-white rounded-xl border border-[#E2E8F0] p-6 text-left shadow-sm hover:shadow-md transition"
+            className="surface-card p-6 text-left transition hover:shadow-md"
           >
 
             {/* Icon Box */}
-            <div className="w-10 h-10 flex items-center justify-center rounded-md bg-[#EEF2FF] text-[#4F46E5] mb-4">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
               {item.icon}
             </div>
 
             {/* Title */}
-            <h3 className="text-sm font-semibold text-[#001C37]">
+            <h3 className="text-sm font-semibold text-slate-900">
               {item.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-2 text-[13px] text-[#464555] leading-[22px]">
+            <p className="section-lead mt-2 text-[13px] leading-6">
               {item.desc}
             </p>
 
