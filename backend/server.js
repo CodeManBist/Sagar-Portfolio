@@ -44,22 +44,28 @@ const REQUEST_WINDOW_MS = 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 const ipRequestWindow = new Map();
 
-const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:5173")
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-app.disable("x-powered-by");
-
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
+      // allow requests with no origin (like Postman)
+      if (!origin) return callback(null, true);
+
+      // allow exact matches
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
       }
 
-      callback(new Error("CORS origin not allowed"));
+      // ✅ allow ALL vercel deployments
+      if (origin.endsWith(".vercel.app")) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CORS origin not allowed"));
     },
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
