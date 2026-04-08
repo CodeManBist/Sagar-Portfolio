@@ -1,26 +1,92 @@
 import { Calendar, MessageCircle } from "lucide-react";
+import { useState } from "react";
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState({ type: "idle", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: "idle", message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to send message");
+      }
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+      setStatus({
+        type: "success",
+        message: result.message || "Thanks. I’ll get back to you soon.",
+      });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error.message || "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="w-full">
 
       {/* FORM CARD */}
       <div className="surface-card w-full p-5 transition hover:shadow-lg sm:p-6 md:p-8">
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
 
           {/* INPUTS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             <input
               type="text"
+              name="name"
               placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              autoComplete="name"
+              required
               className="input-field"
             />
 
             <input
               type="email"
+              name="email"
               placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              autoComplete="email"
+              required
               className="input-field"
             />
 
@@ -29,16 +95,32 @@ const ContactForm = () => {
           {/* TEXTAREA */}
           <textarea
             rows="5"
+            name="message"
             placeholder="Briefly describe your project..."
+            value={formData.message}
+            onChange={handleChange}
+            required
             className="input-field"
           />
 
           {/* BUTTON */}
           <button
-            className="action-button w-full justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white hover:shadow-lg"
+            type="submit"
+            disabled={isSubmitting}
+            className="action-button w-full justify-center bg-linear-to-r from-indigo-600 to-indigo-500 text-white hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
           >
-            Send Message →
+            {isSubmitting ? "Sending..." : "Send Message →"}
           </button>
+
+          {status.type !== "idle" ? (
+            <p
+              className={`text-sm ${
+                status.type === "success" ? "text-emerald-600" : "text-rose-600"
+              }`}
+            >
+              {status.message}
+            </p>
+          ) : null}
 
         </form>
 
