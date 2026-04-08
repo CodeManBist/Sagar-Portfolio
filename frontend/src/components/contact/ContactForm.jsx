@@ -1,6 +1,10 @@
 import { Calendar, MessageCircle } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DISCOVERY_CALL_URL, WHATSAPP_URL, buildWhatsAppLeadUrl } from "../../config/links";
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+const HAS_VALID_TURNSTILE_SITE_KEY =
+  Boolean(TURNSTILE_SITE_KEY) && !String(TURNSTILE_SITE_KEY).includes("your_turnstile_site_key");
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +14,41 @@ const ContactForm = () => {
   });
   const [status, setStatus] = useState({ type: "idle", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const lastForwardRef = useRef({ signature: "", timestamp: 0 });
   const submitLockRef = useRef(false);
+  const turnstileContainerRef = useRef(null);
+  const widgetIdRef = useRef(null);
+
+  useEffect(() => {
+    if (!HAS_VALID_TURNSTILE_SITE_KEY || !turnstileContainerRef.current) {
+      return;
+    }
+
+    const renderTurnstile = () => {
+      if (!window.turnstile || widgetIdRef.current !== null) {
+        return;
+      }
+
+      widgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (token) => setCaptchaToken(token),
+        "expired-callback": () => setCaptchaToken(""),
+        "error-callback": () => setCaptchaToken(""),
+      });
+    };
+
+    renderTurnstile();
+    const intervalId = window.setInterval(renderTurnstile, 500);
+
+    return () => {
+      window.clearInterval(intervalId);
+      if (window.turnstile && widgetIdRef.current !== null) {
+        window.turnstile.remove(widgetIdRef.current);
+      }
+      widgetIdRef.current = null;
+    };
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,7 +72,28 @@ const ContactForm = () => {
       name: formData.name.trim(),
       email: formData.email.trim(),
       message: formData.message.trim(),
+      captchaToken,
     };
+
+    if (!HAS_VALID_TURNSTILE_SITE_KEY) {
+      setStatus({
+        type: "error",
+        message: "Captcha verification is unavailable right now. Please try again later.",
+      });
+      setIsSubmitting(false);
+      submitLockRef.current = false;
+      return;
+    }
+
+    if (!captchaToken) {
+      setStatus({
+        type: "error",
+        message: "Please complete the captcha before sending your message.",
+      });
+      setIsSubmitting(false);
+      submitLockRef.current = false;
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -65,6 +123,10 @@ const ContactForm = () => {
         email: "",
         message: "",
       });
+      setCaptchaToken("");
+      if (window.turnstile && widgetIdRef.current !== null) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
       setStatus({
         type: "success",
         message: result.message || "Thanks. I’ll get back to you soon.",
@@ -100,12 +162,18 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="mx-auto w-full max-w-md">
 
       {/* FORM CARD */}
-      <div className="surface-card w-full p-5 transition hover:shadow-lg sm:p-6 md:p-8">
+      <div className="surface-card w-full overflow-hidden transition hover:shadow-lg">
+        <div className="border-b border-slate-200 bg-linear-to-r from-slate-50 to-white px-4 py-3">
+          <p className="text-[10px] font-semibold tracking-[0.28em] text-indigo-600">CONTACT</p>
+          <h3 className="mt-1 text-base font-bold tracking-tight text-slate-900 sm:text-lg">
+            Let’s talk about your next project
+          </h3>
+        </div>
 
-        <form className="space-y-5" onSubmit={handleSubmit} aria-live="polite">
+        <form className="space-y-3 px-4 py-4" onSubmit={handleSubmit} aria-live="polite">
 
           {/* INPUTS */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -143,11 +211,21 @@ const ContactForm = () => {
             className="input-field"
           />
 
+          <div className="mx-auto w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 shadow-sm">
+            <div className="flex min-h-12 items-center justify-center rounded-md border border-dashed border-slate-300 bg-white px-1 py-1">
+              <div ref={turnstileContainerRef} className="origin-center scale-[0.8] sm:scale-90"></div>
+            </div>
+
+            {!HAS_VALID_TURNSTILE_SITE_KEY ? (
+              <p className="mt-1 text-[10px] text-rose-600">Captcha key missing.</p>
+            ) : null}
+          </div>
+
           {/* BUTTON */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="action-button w-full justify-center bg-linear-to-r from-indigo-600 to-indigo-500 text-white hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
+            className="action-button w-full justify-center bg-linear-to-r from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-600/20 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? "Sending..." : "Send Message →"}
           </button>
@@ -156,47 +234,46 @@ const ContactForm = () => {
             <p
               className={`text-sm font-medium ${
                 status.type === "success"
-                  ? "rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-700"
-                  : "rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-rose-700"
+                  ? "rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-700"
+                  : "rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-rose-700"
               }`}
             >
               {status.message}
             </p>
           ) : null}
 
-          {status.type === "success" ? (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-              What happens next: I’ll review your message and reply soon. If you want a faster response, use Discovery Call or WhatsApp below.
+          <div className="pt-1">
+            <div className="mb-3 flex items-center gap-2">
+              <div className="h-px flex-1 bg-slate-200"></div>
+              <span className="text-[10px] font-semibold tracking-[0.22em] text-slate-400">
+                OR CONNECT VIA
+              </span>
+              <div className="h-px flex-1 bg-slate-200"></div>
             </div>
-          ) : null}
+
+            {/* LINKS */}
+            <div className="grid gap-2 sm:grid-cols-2">
+              <a
+                href={DISCOVERY_CALL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700 transition hover:bg-indigo-100"
+              >
+                <Calendar size={16} /> Discovery Call
+              </a>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100"
+              >
+                <MessageCircle size={16} /> WhatsApp
+              </a>
+            </div>
+          </div>
 
         </form>
-
-        {/* DIVIDER */}
-        <div className="my-6 text-center text-xs tracking-[0.22em] text-slate-400">
-          OR CONNECT VIA
-        </div>
-
-        {/* LINKS */}
-        <div className="flex justify-center gap-6 text-sm">
-          <a
-            href={DISCOVERY_CALL_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-indigo-600 hover:underline"
-          >
-            <Calendar size={16} /> Discovery Call
-          </a>
-
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-emerald-600 hover:underline"
-          >
-            <MessageCircle size={16} /> WhatsApp
-          </a>
-        </div>
 
       </div>
 

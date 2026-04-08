@@ -1,8 +1,42 @@
 import express from "express";
 import cors from "cors";
+import { readFileSync, existsSync } from "node:fs";
+import { resolve } from "node:path";
+
+const loadEnvFile = (filePath) => {
+  if (!existsSync(filePath)) {
+    return;
+  }
+
+  const envFile = readFileSync(filePath, "utf8");
+  const lines = envFile.split(/\r?\n/);
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed || trimmed.startsWith("#")) {
+      continue;
+    }
+
+    const equalsIndex = trimmed.indexOf("=");
+    if (equalsIndex === -1) {
+      continue;
+    }
+
+    const key = trimmed.slice(0, equalsIndex).trim();
+    const value = trimmed.slice(equalsIndex + 1).trim();
+
+    if (key && !process.env[key]) {
+      process.env[key] = value.replace(/^['\"]|['\"]$/g, "");
+    }
+  }
+};
+
+loadEnvFile(resolve(process.cwd(), ".env"));
 
 const app = express();
 const port = process.env.PORT || 3001;
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 const DUPLICATE_WINDOW_MS = 10000;
 let lastSubmission = { signature: "", timestamp: 0 };
 
@@ -60,16 +94,65 @@ const rateLimitByIp = (request, response, next) => {
   next();
 };
 
+const verifyTurnstileToken = async (token, remoteIp) => {
+  if (!TURNSTILE_SECRET_KEY) {
+    return { success: false, message: "Captcha verification failed. Please try again." };
+  }
+
+  const payload = new URLSearchParams();
+  payload.set("secret", TURNSTILE_SECRET_KEY);
+  payload.set("response", token);
+  if (remoteIp) {
+    payload.set("remoteip", remoteIp);
+  }
+
+  const turnstileResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: payload.toString(),
+  });
+
+  if (!turnstileResponse.ok) {
+    return { success: false, message: "Captcha verification failed. Please try again." };
+  }
+
+  const result = await turnstileResponse.json();
+  if (!result.success) {
+    return { success: false, message: "Captcha verification failed. Please try again." };
+  }
+
+  return { success: true };
+};
+
 app.get("/api/health", (_request, response) => {
   response.json({ ok: true });
 });
 
-app.post("/api/contact", rateLimitByIp, (request, response) => {
-  const { name, email, message } = request.body ?? {};
+app.post("/api/contact", rateLimitByIp, async (request, response) => {
+  const { name, email, message, captchaToken } = request.body ?? {};
 
-  if (!name || !email || !message) {
+  if (!name || !email || !message || !captchaToken) {
     return response.status(400).json({
-      message: "Name, email, and message are required.",
+      message: "Name, email, message, and captcha are required.",
+    });
+  }
+
+  try {
+    const captchaVerification = await verifyTurnstileToken(
+      String(captchaToken),
+      request.ip || request.headers["x-forwarded-for"]
+    );
+
+    if (!captchaVerification.success) {
+      return response.status(400).json({
+        message: captchaVerification.message,
+      });
+    }
+  } catch {
+    return response.status(500).json({
+      message: "Unable to verify captcha. Please try again.",
     });
   }
 
