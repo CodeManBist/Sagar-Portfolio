@@ -126,6 +126,10 @@ const verifyTurnstileToken = async (token, remoteIp) => {
   return { success: true };
 };
 
+app.get("/", (_req, res) => {
+  res.send("Backend is running 🚀");
+});
+
 app.get("/api/health", (_request, response) => {
   response.json({ ok: true });
 });
