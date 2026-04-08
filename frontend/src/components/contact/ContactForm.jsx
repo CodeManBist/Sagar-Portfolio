@@ -1,6 +1,6 @@
 import { Calendar, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { DISCOVERY_CALL_URL } from "../../config/links";
+import { DISCOVERY_CALL_URL, WHATSAPP_URL } from "../../config/links";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -67,8 +67,7 @@ const ContactForm = () => {
         <form className="space-y-5" onSubmit={handleSubmit}>
 
           {/* INPUTS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <input
               type="text"
               name="name"
@@ -90,7 +89,6 @@ const ContactForm = () => {
               required
               className="input-field"
             />
-
           </div>
 
           {/* TEXTAREA */}
@@ -132,7 +130,6 @@ const ContactForm = () => {
 
         {/* LINKS */}
         <div className="flex justify-center gap-6 text-sm">
-          
           <a
             href={DISCOVERY_CALL_URL}
             target="_blank"
@@ -142,16 +139,20 @@ const ContactForm = () => {
             <Calendar size={16} /> Discovery Call
           </a>
 
-          <a href="#" className="flex items-center gap-2 text-emerald-600 hover:underline">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 text-emerald-600 hover:underline"
+          >
             <MessageCircle size={16} /> WhatsApp
           </a>
-
         </div>
 
       </div>
 
       {/* ✅ BADGE RIGHT SIDE BELOW FORM */}
-      <div className="flex justify-center items-center mt-4">
+      <div className="mt-4 flex items-center justify-center">
         <span className="flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5 text-xs text-emerald-600 shadow-sm">
           <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
           Available for new projects
