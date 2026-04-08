@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { DISCOVERY_CALL_URL } from "../../config/links";
 
 const CTASection = () => {
   return (
@@ -39,12 +40,14 @@ const CTASection = () => {
               Start Your Project
             </Link>
 
-            <Link
-              to="/contact#contact-form"
+            <a
+              href={DISCOVERY_CALL_URL}
+              target="_blank"
+              rel="noreferrer"
               className="action-button border border-white/10 bg-white/5 text-white hover:bg-white/10"
             >
               Book a Consultation
-            </Link>
+            </a>
 
           </div>
 

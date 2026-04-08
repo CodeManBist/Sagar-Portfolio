@@ -1,5 +1,6 @@
 import { Calendar, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { DISCOVERY_CALL_URL } from "../../config/links";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -132,7 +133,12 @@ const ContactForm = () => {
         {/* LINKS */}
         <div className="flex justify-center gap-6 text-sm">
           
-          <a href="#" className="flex items-center gap-2 text-indigo-600 hover:underline">
+          <a
+            href={DISCOVERY_CALL_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 text-indigo-600 hover:underline"
+          >
             <Calendar size={16} /> Discovery Call
           </a>
 
