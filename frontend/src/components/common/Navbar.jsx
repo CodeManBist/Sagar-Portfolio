@@ -5,8 +5,8 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const navItems = ["Home", "Work", "Services", "Contact"];
-  const paths = ["/", "/work", "/services", "/contact"];
+  const navItems = ["Home", "Project", "Services", "Contact"];
+  const paths = ["/", "/project", "/services", "/contact"];
 
   return (
     <header className="h-[4.5rem] flex items-center justify-between px-6 md:px-8 sticky top-0 z-50 bg-[#FDFEFF]">
