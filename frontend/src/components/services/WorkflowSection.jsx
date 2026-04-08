@@ -1,65 +1,84 @@
+import { SectionContainer, TextGradient } from "../ui";
+import { ArrowRight } from "lucide-react";
+
 const workflow = [
   {
     step: "01",
     title: "Discovery & Architecture",
-    desc: "We define your data schemas and system architecture before a single line of UI is coded. Precision starts with the foundation.",
+    desc: "We define your data schemas and system architecture before coding. Precision starts with the foundation.",
   },
   {
     step: "02",
     title: "Agile Sprints",
-    desc: "Bi-weekly deliverables where you see working software. I use the MERN stack to rapidly prototype and iterate on core business logic.",
+    desc: "Bi-weekly deliverables with working software. MERN stack for rapid prototyping and iteration.",
   },
   {
     step: "03",
-    title: "Deployment & Ops",
-    desc: "Production-ready launch on AWS or Vercel. Continuous CI/CD pipelines ensure your app stays updated and secure.",
+    title: "Launch & Support",
+    desc: "Production-ready deployment on AWS or Vercel. CI/CD pipelines keep your app secure and updated.",
   },
 ];
 
 const WorkflowSection = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20 text-center">
+    <SectionContainer bgVariant="white" as="section">
 
-      {/* Top Label */}
-      <p className="text-xs tracking-[3px] text-[#6366F1] font-semibold mb-4">
-        THE WORKFLOW
-      </p>
+      {/* Section Header */}
+      <div className="text-center mb-12">
+        <p className="text-xs font-bold tracking-widest text-primary-navy/60 uppercase mb-3">
+          Development Process
+        </p>
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+          From logic to <TextGradient variant="teal-amber" as="span">launch</TextGradient>
+        </h2>
+        <p className="text-neutral-600 max-w-2xl mx-auto">
+          A structured approach ensuring clarity, quality, and predictable delivery timelines.
+        </p>
+      </div>
 
-      {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-12">
-        From logic to launch
-      </h2>
-
-      {/* Cards */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      {/* Timeline Cards */}
+      <div className="grid md:grid-cols-3 gap-8 relative">
+        
+        {/* Connecting lines (hidden on mobile) */}
+        <div className="hidden md:block absolute top-20 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary-purple to-primary-teal opacity-20" />
 
         {workflow.map((item, index) => (
           <div
             key={index}
-            className="relative bg-white border border-[#E2E8F0] rounded-2xl p-6 text-left hover:shadow-md transition"
+            className="relative group"
           >
-
-            {/* Step Number (faded background) */}
-            <span className="absolute top-4 right-6 text-4xl font-bold text-[#E2E8F0]">
+            {/* Step indicator circle */}
+            <div className="absolute -top-8 left-0 w-16 h-16 rounded-full bg-gradient-to-br from-primary-purple to-primary-teal flex items-center justify-center text-white font-bold text-xl shadow-lg">
               {item.step}
-            </span>
+            </div>
 
-            {/* Title */}
-            <h3 className="text-base font-semibold text-[#0F172A]">
-              {item.title}
-            </h3>
+            {/* Card */}
+            <div className="bg-white border border-neutral-100 rounded-xl p-8 pt-12 mt-4 hover:border-primary-purple/20 hover:shadow-lg transition-all duration-300">
 
-            {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[24px] max-w-xs">
-              {item.desc}
-            </p>
+              {/* Title */}
+              <h3 className="text-lg font-bold text-neutral-900 mb-3">
+                {item.title}
+              </h3>
 
+              {/* Description */}
+              <p className="text-neutral-600 text-sm leading-relaxed mb-4">
+                {item.desc}
+              </p>
+
+              {/* Arrow indicator */}
+              {index < workflow.length - 1 && (
+                <div className="text-primary-purple opacity-50 text-2xl hidden md:block">
+                  <ArrowRight className="w-5 h-5" />
+                </div>
+              )}
+
+            </div>
           </div>
         ))}
 
       </div>
 
-    </section>
+    </SectionContainer>
   );
 };
 

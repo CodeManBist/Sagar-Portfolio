@@ -1,24 +1,52 @@
 import React from 'react'
+import { SectionContainer, Badge } from '../ui'
 
 const TechStack = () => {
+  const techs = [
+    { name: "MongoDB", color: "teal" },
+    { name: "Express.js", color: "navy" },
+    { name: "React", color: "purple" },
+    { name: "Node.js", color: "amber" },
+    { name: "Tailwind CSS", color: "teal" },
+    { name: "PostgreSQL", color: "purple" },
+  ]
+
   return (
-    <section className='bg-[#EFF4FF] py-10'>
+    <SectionContainer bgVariant="gradient-teal" as="section" className="py-12">
+      <div className="text-center">
+        {/* Label */}
+        <p className="text-xs font-bold tracking-widest text-primary-navy/60 mb-4 uppercase">
+          Tech Stack & Expertise
+        </p>
 
-        {/* Container */}
-        <div className='max-w-6xl mx-auto px-6 text-center'>
-            {/* Heading */}
-            <p className='text-xs tracking-widest text-[#777587] mb-6'>TRUSTED TECH STACK</p>
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-12">
+          Built with Modern Technologies
+        </h2>
 
-            {/* Tech Stack */}
-            <div className='flex flex-wrap justify-center items-center gap-8 md: gap-12 text-[#001C37] text-sm md:text-base font-medium'>
-                <span>MongoDB</span>
-                <span>Express</span>
-                <span>React</span>
-                <span>Node.js</span>
-                <span>Tailwind</span>
+        {/* Tech Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {techs.map((tech) => (
+            <div
+              key={tech.name}
+              className="flex flex-col items-center justify-center p-4 rounded-lg bg-white/60 backdrop-blur-sm hover:bg-white transition-all duration-300 group cursor-default"
+            >
+              <div className="text-2xl font-bold mb-2 text-neutral-700 group-hover:scale-110 transition">
+                {tech.name.split(' ')[0].slice(0, 2).toUpperCase()}
+              </div>
+              <p className="text-xs font-medium text-neutral-600 text-center">
+                {tech.name}
+              </p>
             </div>
+          ))}
         </div>
-    </section>
+
+        {/* Bottom text */}
+        <p className="mt-12 text-neutral-600 text-sm max-w-2xl mx-auto">
+          Leveraging industry-standard tools and frameworks to build scalable, performant, and maintainable solutions.
+        </p>
+      </div>
+    </SectionContainer>
   )
 }
 

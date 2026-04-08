@@ -1,5 +1,177 @@
 @import "tailwindcss";
 
-body {
-  background-color: #f8f8fe;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-800 antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  /* Typography Defaults */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-neutral-900;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button {
+    @apply transition-all duration-200;
+  }
+}
+
+@layer components {
+  /* Text Gradient Utility */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-purple to-primary-teal bg-clip-text text-transparent;
+  }
+
+  /* Premium Glassmorphism Card */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 rounded-lg shadow-lg;
+  }
+
+  /* Section Container */
+  .section-container {
+    @apply px-6 sm:px-10 lg:px-16 xl:px-24 py-16 sm:py-20 lg:py-28;
+  }
+
+  /* Smooth Gradient Background */
+  .gradient-bg-primary {
+    @apply bg-gradient-to-br from-primary-navy via-transparent to-transparent;
+  }
+
+  .gradient-bg-accent {
+    @apply bg-gradient-to-r from-primary-teal to-primary-purple;
+  }
+
+  /* Button Base Styles */
+  .btn-base {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium 
+    text-sm transition-all duration-200 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply btn-base bg-primary-purple text-white shadow-md hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply btn-base bg-primary-teal text-white shadow-md hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-accent {
+    @apply btn-base bg-primary-amber text-white shadow-md hover:shadow-lg hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply btn-base border-2 border-primary-purple text-primary-purple hover:bg-primary-purple 
+    hover:text-white;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  /* Smooth scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-600;
+  }
+}
+
+@layer utilities {
+  /* Flex Center */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* Grid Center */
+  .grid-center {
+    @apply grid place-items-center;
+  }
+
+  /* Text Balance for better readability */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes slide-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(91, 78, 232, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(91, 78, 232, 0.5);
+    }
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animate-slide-in-down {
+    animation: slide-in-down 0.3s ease-out;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
 }

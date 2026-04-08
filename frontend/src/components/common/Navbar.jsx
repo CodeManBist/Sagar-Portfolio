@@ -1,97 +1,91 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Button } from "../ui";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const navItems = ["Home", "Project", "Services", "Contact"];
-  const paths = ["/", "/project", "/services", "/contact"];
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Projects", path: "/project" },
+    { label: "Services", path: "/services" },
+    { label: "Contact", path: "/contact" },
+  ];
 
   return (
-    <header className="h-[4.5rem] flex items-center justify-between px-6 md:px-8 sticky top-0 z-50 bg-[#FDFEFF]">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-neutral-100 shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
+        <div className="flex items-center justify-between h-16 md:h-20 transition-all duration-300">
+          
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 z-50">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-purple to-primary-teal flex items-center justify-center text-white font-bold text-lg">
+              SC
+            </div>
+            <span className="hidden sm:inline font-semibold text-neutral-900">
+              Sagar Clarity
+            </span>
+          </Link>
 
-      {/* Logo */}
-      <h1 className="text-[18px] font-semibold text-[#0F172A] z-50">
-        <Link to="/">Sagar Clarity</Link>
-      </h1>
-
-      {/* Desktop Nav */}
-      <nav className="hidden md:block">
-        <ul className="flex items-center text-[15px] text-[#475569]">
-          {navItems.map((item, i) => (
-            <li key={item} className="px-2">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
               <Link
-                to={paths[i]}
-                className="relative inline-block py-1 hover:text-[#4F46E5] transition
-                after:content-[''] after:absolute after:left-0 after:bottom-0
-                after:h-[2px] after:w-0 after:bg-[#4F46E5]
-                after:transition-all after:duration-300 after:ease-in-out
-                hover:after:w-full"
+                key={item.path}
+                to={item.path}
+                className="text-neutral-600 text-sm font-medium hover:text-primary-purple transition-colors relative group"
               >
-                {item}
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-purple to-primary-teal group-hover:w-full transition-all duration-300" />
               </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+            ))}
+          </nav>
 
-      {/* Desktop Button */}
-      <div className="hidden md:block">
-        <Link
-          to="/contact"
-          className="bg-[#493EE5] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition"
-        >
-          Hire Me
-        </Link>
-      </div>
-
-      {/* Mobile Icon */}
-      <button
-        className="md:hidden z-50"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {/* Mobile Sidebar */}
-      <div
-        className={`fixed top-[4.5rem] left-0 h-[calc(100vh-4.5rem)] w-[70%] bg-[#FDFEFF] shadow-md transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "-translate-x-full"
-        } md:hidden`}
-      >
-        <ul className="flex flex-col items-start px-6 py-6 text-[15px] text-[#475569]">
-
-          {navItems.map((item, i) => (
-            <li key={item} className="w-full py-3">
-              <Link
-                to={paths[i]}
-                onClick={() => setOpen(false)}
-                className="relative inline-block hover:text-[#4F46E5] transition
-                after:content-[''] after:absolute after:left-0 after:bottom-0
-                after:h-[2px] after:w-0 after:bg-[#4F46E5]
-                after:transition-all after:duration-300 after:ease-in-out
-                hover:after:w-full"
-              >
-                {item}
-              </Link>
-            </li>
-          ))}
-
-          {/* Button */}
-          <li className="mt-4 w-full">
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="block bg-[#493EE5] text-white px-6 py-2 rounded-md text-sm text-center"
-            >
-              Hire Me
+          {/* Desktop Button */}
+          <div className="hidden md:block">
+            <Link to="/contact">
+              <Button variant="primary" size="md">
+                Let&apos;s Work Together
+              </Button>
             </Link>
-          </li>
+          </div>
 
-        </ul>
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden z-50 p-2 text-neutral-700 hover:text-primary-purple transition"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Mobile Sidebar */}
+          {open && (
+            <div className="fixed top-16 md:top-20 left-0 right-0 bg-white border-b border-neutral-100 md:hidden animate-slide-in-down">
+              <nav className="flex flex-col px-6 py-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className="py-3 text-neutral-600 text-sm font-medium hover:text-primary-purple transition-colors border-b border-neutral-100 last:border-b-0"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="pt-4">
+                  <Link to="/contact" onClick={() => setOpen(false)} className="w-full">
+                    <Button variant="primary" size="md" className="w-full">
+                      Let&apos;s Work Together
+                    </Button>
+                  </Link>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
       </div>
-
     </header>
   );
 };

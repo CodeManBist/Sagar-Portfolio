@@ -1,117 +1,122 @@
 import { Globe, Layout, LayoutDashboard, Server } from "lucide-react";
+import { SectionContainer, Badge } from "../ui";
+import { Check } from "lucide-react";
 
 const services = [
   {
-    icon: <Globe size={18} />,
+    icon: <Globe size={24} />,
     title: "Business Websites",
-    desc: "High-performance corporate presences engineered for maximum authority and brand trust. Built with SEO-first architecture and global scalability in mind.",
+    desc: "High-performance corporate presences engineered for authority and trust. SEO-first architecture with global scalability.",
     benefits: [
-      "Next-day indexing with Next.js SSR",
-      "99+ Google Lighthouse performance scores",
-      "Integrated CMS for effortless updates",
+      "Next-day indexing with SSR",
+      "99+ Google Lighthouse score",
+      "Integrated CMS for updates",
     ],
-    tags: ["RESPONSIVE UI", "ANALYTICS SETUP", "TECHNICAL SEO"],
+    tags: ["RESPONSIVE", "SEO", "ANALYTICS"],
+    color: "purple",
   },
   {
-    icon: <Layout size={18} />,
+    icon: <Layout size={24} />,
     title: "Landing Pages",
-    desc: "Conversion-optimized funnels designed with data-backed UX patterns. Engineered to minimize friction and turn traffic into measurable business leads.",
+    desc: "Conversion-optimized funnels with data-backed UX patterns. Turn traffic into measurable business results.",
     benefits: [
-      "42% average increase in conversion rates",
-      "A/B testing ready infrastructure",
-      "Lightning-fast 200ms initial load time",
+      "42% conversion rate increase",
+      "A/B testing ready",
+      "200ms load time",
     ],
-    tags: ["LEAD CAPTURE", "HEATMAP INTEGRATION", "COPY REVIEW"],
+    tags: ["LEAD CAPTURE", "ANALYTICS", "OPTIMIZATION"],
+    color: "teal",
   },
   {
-    icon: <LayoutDashboard size={18} />,
+    icon: <LayoutDashboard size={24} />,
     title: "Dashboards & Admin Panels",
-    desc: "Complex internal tools that simplify data management. Custom React-based dashboards that turn messy operations into actionable business intelligence.",
+    desc: "Complex internal tools that simplify data management. Turn operations into actionable business intelligence.",
     benefits: [
-      "Role-Based Access Control (RBAC)",
-      "Real-time data via WebSockets",
-      "Automated PDF/Excel report generation",
+      "Role-Based Access Control",
+      "Real-time WebSocket updates",
+      "Automated report generation",
     ],
-    tags: ["SECURE AUTH", "DATA EXPORT", "ACTIVITY LOGS"],
+    tags: ["SECURE AUTH", "EXPORT", "LOGS"],
+    color: "amber",
   },
   {
-    icon: <Server size={18} />,
-    title: "Backend & API Development",
-    desc: "Robust Node.js infrastructure built for scale. From RESTful APIs to third-party integrations and complex database architectures.",
+    icon: <Server size={24} />,
+    title: "Backend & API",
+    desc: "Robust Node.js infrastructure built for scale. RESTful APIs to third-party integrations and databases.",
     benefits: [
-      "Enterprise-grade security standards",
-      "Auto-scaling AWS/Vercel cloud setup",
-      "Comprehensive Swagger/Postman docs",
+      "Enterprise-grade security",
+      "Auto-scaling cloud setup",
+      "Complete API documentation",
     ],
-    tags: ["API DOCUMENTATION", "DB MIGRATIONS", "UNIT TESTING"],
+    tags: ["API DOCS", "MIGRATIONS", "TESTING"],
+    color: "navy",
   },
 ];
 
 const ServicesGrid = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+    <SectionContainer bgVariant="light" as="section">
+      <div className="grid md:grid-cols-2 gap-8">
 
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-white border border-[#E2E8F0] rounded-2xl p-6 md:p-8 hover:shadow-lg transition"
+            className="group bg-white border border-neutral-100 rounded-xl p-8 hover:border-neutral-200 hover:shadow-lg transition-all duration-300"
           >
 
-            {/* Icon */}
-            <div className="w-10 h-10 flex items-center justify-center bg-[#EEF2FF] text-[#4F46E5] rounded-md mb-4">
+            {/* Icon Container */}
+            <div className={`w-14 h-14 flex items-center justify-center rounded-lg mb-6
+              ${service.color === "purple" ? "bg-primary-purple/10 text-primary-purple" : ""}
+              ${service.color === "teal" ? "bg-primary-teal/10 text-primary-teal" : ""}
+              ${service.color === "amber" ? "bg-primary-amber/10 text-primary-amber" : ""}
+              ${service.color === "navy" ? "bg-primary-navy/10 text-primary-navy" : ""}
+              group-hover:scale-110 transition`}>
               {service.icon}
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-semibold text-[#0F172A]">
+            <h3 className="text-xl font-bold text-neutral-900 mb-3">
               {service.title}
             </h3>
 
             {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[24px]">
+            <p className="text-neutral-600 text-sm leading-relaxed mb-6">
               {service.desc}
             </p>
 
             {/* Benefits */}
-            <div className="mt-5 bg-[#F1F5F9] rounded-xl p-4">
-              <p className="text-xs font-semibold text-[#4F46E5] mb-3">
-                KEY BENEFITS
-              </p>
-
-              <ul className="space-y-2 text-sm text-[#475569]">
-                {service.benefits.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#4F46E5]">•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="space-y-2 mb-6 pb-6 border-b border-neutral-100">
+              {service.benefits.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <Check className={`w-4 h-4 flex-shrink-0 mt-0.5
+                    ${service.color === "purple" ? "text-primary-purple" : ""}
+                    ${service.color === "teal" ? "text-primary-teal" : ""}
+                    ${service.color === "amber" ? "text-primary-amber" : ""}
+                    ${service.color === "navy" ? "text-primary-navy" : ""}`} />
+                  <span className="text-sm text-neutral-700">{item}</span>
+                </div>
+              ))}
             </div>
 
             {/* Tags */}
-            <div className="mt-5">
-              <p className="text-[10px] text-[#94A3B8] mb-2 tracking-wide">
-                WHAT YOU GET
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {service.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="text-[10px] bg-[#EEF2FF] text-[#4F46E5] px-3 py-1 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2">
+              {service.tags.map((tag, i) => (
+                <Badge 
+                  key={i} 
+                  color={service.color} 
+                  variant="light" 
+                  size="sm"
+                >
+                  {tag}
+                </Badge>
+              ))}
             </div>
 
           </div>
         ))}
 
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 

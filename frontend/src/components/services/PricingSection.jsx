@@ -1,126 +1,151 @@
+import { SectionContainer, Badge, Button } from "../ui";
+import { Check } from "lucide-react";
+
 const plans = [
   {
-    title: "THE MVP",
+    title: "The MVP",
     price: "$2k–$5k",
-    desc: "Ideal for validating a concept or launching a high-end marketing site with custom interactions.",
+    desc: "Perfect for validating concepts or launching high-end marketing sites with custom interactions.",
     features: [
       "Custom React Frontend",
       "14-Day Delivery Sprints",
       "SEO Architecture",
+      "30 Days Support",
     ],
     button: "Start Discovery",
     highlight: false,
+    color: "purple",
   },
   {
-    title: "THE FULL STACK",
+    title: "The Full Stack",
     price: "$5k–$12k",
-    desc: "Complete web application with secure user auth, complex database logic, and admin dashboard.",
+    desc: "Complete web application with secure auth, complex database logic, and admin dashboard.",
     features: [
       "MERN Architecture",
-      "Custom Analytics Dashboard",
+      "Analytics Dashboard",
       "API Integration",
+      "60 Days Support",
+      "Performance Optimization",
     ],
     button: "Book Now",
     highlight: true,
+    color: "teal",
   },
   {
-    title: "THE PLATFORM",
+    title: "The Platform",
     price: "$15k+",
-    desc: "Complex multi-user platforms requiring high scalability, microservices, and custom external APIs.",
+    desc: "Complex multi-user platforms with high scalability, microservices, and external API integrations.",
     features: [
       "Scalable Microservices",
       "24/7 Priority Support",
-      "Multi-Tenancy Setup",
+      "Multi-Tenancy",
+      "Custom Infrastructure",
+      "Team Training",
     ],
     button: "Request Quote",
     highlight: false,
+    color: "amber",
   },
 ];
 
 const PricingSection = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-20">
+    <SectionContainer bgVariant="light" as="section">
 
-      {/* Top */}
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-
-        <div>
-          <p className="text-xs tracking-[3px] text-[#6366F1] font-semibold mb-2">
-            PRICING
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A]">
-            Value-led investment models
-          </h2>
-        </div>
-
-        <p className="text-sm text-[#64748B] max-w-md">
-          All projects include comprehensive documentation, 30 days of post-launch support, and full source code ownership.
+      {/* Header */}
+      <div className="text-center mb-12">
+        <p className="text-xs font-bold tracking-widest text-primary-navy/60 uppercase mb-3">
+          Pricing
         </p>
-
+        <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+          Value-Driven Investment Models
+        </h2>
+        <p className="text-neutral-600 max-w-2xl mx-auto">
+          All packages include comprehensive documentation, post-launch support, and full source code ownership.
+        </p>
       </div>
 
       {/* Cards */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-8 relative">
 
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`relative rounded-2xl p-6 md:p-8 border transition-all ${
+            className={`relative rounded-xl overflow-hidden transition-all duration-300 ${
               plan.highlight
-                ? "bg-white border-[#6366F1] shadow-lg scale-[1.03]"
-                : "bg-white border-[#E2E8F0]"
+                ? "md:scale-105 ring-2 ring-primary-teal shadow-xl"
+                : "hover:shadow-lg"
             }`}
           >
 
-            {/* Badge */}
-            {plan.highlight && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] bg-[#6366F1] text-white px-3 py-1 rounded-full">
-                MOST REQUESTED
-              </span>
-            )}
+            {/* Background */}
+            <div className={`absolute inset-0 ${
+              plan.highlight 
+                ? "bg-gradient-to-br from-primary-teal/5 to-transparent" 
+                : "bg-white"
+            }`} />
 
-            {/* Title */}
-            <p className="text-xs text-[#94A3B8] mb-2">
-              {plan.title}
-            </p>
+            {/* Content */}
+            <div className="relative p-8 bg-white border border-neutral-100 rounded-xl h-full flex flex-col">
 
-            {/* Price */}
-            <h3 className="text-2xl font-bold text-[#4F46E5]">
-              {plan.price}
-            </h3>
+              {/* Badge */}
+              {plan.highlight && (
+                <div className="mb-6">
+                  <Badge color="teal" variant="filled" size="sm">
+                    MOST POPULAR
+                  </Badge>
+                </div>
+              )}
 
-            {/* Description */}
-            <p className="mt-3 text-sm text-[#64748B] leading-[22px]">
-              {plan.desc}
-            </p>
+              {/* Title */}
+              <p className="text-xs font-bold tracking-widest text-neutral-600 uppercase mb-2">
+                {plan.title}
+              </p>
 
-            {/* Features */}
-            <ul className="mt-5 space-y-3 text-sm text-[#475569]">
-              {plan.features.map((item, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="text-[#4F46E5]">✔</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
+              {/* Price */}
+              <h3 className={`text-3xl font-bold mb-2 ${
+                plan.highlight ? "text-primary-teal" : "text-neutral-900"
+              }`}>
+                {plan.price}
+              </h3>
 
-            {/* Button */}
-            <button
-              className={`mt-6 w-full py-2 rounded-md text-sm font-medium transition ${
-                plan.highlight
-                  ? "bg-gradient-to-r from-[#4F46E5] to-[#6366F1] text-white shadow-md hover:opacity-90"
-                  : "border border-[#6366F1] text-[#4F46E5] hover:bg-[#EEF2FF]"
-              }`}
-            >
-              {plan.button}
-            </button>
+              {/* Description */}
+              <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                {plan.desc}
+              </p>
+
+              {/* Divider */}
+              <div className="w-full h-px bg-neutral-100 mb-6" />
+
+              {/* Features */}
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                      plan.highlight ? "text-primary-teal" : "text-primary-purple"
+                    }`} />
+                    <span className="text-sm text-neutral-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Button */}
+              <Button 
+                variant={plan.highlight ? "secondary" : "outline"}
+                size="md"
+                className="w-full"
+              >
+                {plan.button}
+              </Button>
+
+            </div>
 
           </div>
         ))}
 
       </div>
 
-    </section>
+    </SectionContainer>
   );
 };
 

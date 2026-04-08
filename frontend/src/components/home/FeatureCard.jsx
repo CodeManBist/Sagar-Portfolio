@@ -1,25 +1,21 @@
 import React from 'react'
+import { Card } from '../ui'
 
-const FeatureCard = ({ icon, title, description }) => {
+const FeatureCard = ({ icon, title, description, bgColor = "white" }) => {
+  const colors = ["purple", "teal", "amber", "navy"]
+  const colorMap = { "purple": 0, "teal": 1, "amber": 2, "navy": 3 }
+  const bgColors = ["bg-white", "bg-white", "bg-white", "bg-white"]
+  
   return (
-    <div className='bg-[#FFFFFF] p-6 rounded-xl shadow-sm hover:shadow-md transition'>
-
-      {/* Icon */}
-      <div className='text-[#493EE5] text-xl mb-4'>
-        {icon}
-      </div>
-
-      {/* Title */}
-      <h3 className='text-[#001C37] font-semibold text-[16px] mb-2'>
-        {title}
-      </h3>
-      
-      {/* Description */}
-      <p className='text-[#464555] text-[14px] leading-relaxed'>
-        {description}
-      </p>
-
-    </div>
+    <Card
+      variant="floating"
+      icon={icon}
+      title={title}
+      description={description}
+      bgColor={bgColor}
+      className="h-full"
+      hoverEffect={true}
+    />
   )
 }
 

@@ -1,32 +1,38 @@
+import { SectionContainer, Badge, TextGradient } from '../ui'
+
 const ServiceHero = () => {
   return (
-    <section className="bg-[#F5F7FB] px-6 md:px-12 lg:px-20 py-24 text-center">
+    <SectionContainer bgVariant="gradient-navy" as="section" className="relative overflow-hidden">
+      
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary-purple/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary-teal/5 rounded-full blur-3xl -z-10" />
 
-      {/* Badge */}
-      <div className="inline-block mb-6">
-        <span className="text-[11px] tracking-wider font-medium text-[#4F46E5] bg-[#E0E7FF] px-4 py-1 rounded-full">
-          ● SERVICE CATALOG
-        </span>
+      <div className="text-center max-w-4xl mx-auto">
+        
+        {/* Badge */}
+        <div className="inline-block mb-6 animate-fade-in">
+          <Badge color="teal" variant="light" size="md">
+            SERVICE SOLUTIONS
+          </Badge>
+        </div>
+
+        {/* Heading */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          Surgical engineering for{" "}
+          <TextGradient variant="teal-amber" as="span">
+            high-growth businesses
+          </TextGradient>
+        </h1>
+
+        {/* Description */}
+        <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+          Precise, scalable, and business-focused development solutions built on the MERN stack. Explore how I can accelerate your growth and technical infrastructure.
+        </p>
+
       </div>
 
-      {/* Heading */}
-      <h1 className="text-3xl md:text-5xl lg:text-[56px] font-bold text-[#0F172A] leading-tight max-w-4xl mx-auto">
-        Surgical engineering <br />
-        for{" "}
-        <span className="text-[#4F46E5]">
-          high-growth
-        </span>{" "}
-        startups.
-      </h1>
-
-      {/* Description */}
-      <p className="mt-6 text-[#64748B] text-base md:text-lg max-w-2xl mx-auto leading-[28px]">
-        Precise, scalable, and business-focused development solutions built
-        on the MERN stack. Select a category below to explore technical
-        specifications and ROI.
-      </p>
-
-    </section>
+    </SectionContainer>
   );
 };
 
