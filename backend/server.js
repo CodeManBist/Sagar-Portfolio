@@ -73,6 +73,13 @@ app.use(
 );
 app.use(express.json({ limit: "10kb" }));
 
+app.use((request, _response, next) => {
+  if (request.url.includes("//")) {
+    request.url = request.url.replace(/\/{2,}/g, "/");
+  }
+  next();
+});
+
 const isValidEmail = (email) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
