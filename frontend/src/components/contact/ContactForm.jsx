@@ -5,6 +5,8 @@ import { DISCOVERY_CALL_URL, WHATSAPP_URL, buildWhatsAppLeadUrl } from "../../co
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const HAS_VALID_TURNSTILE_SITE_KEY =
   Boolean(TURNSTILE_SITE_KEY) && !String(TURNSTILE_SITE_KEY).includes("your_turnstile_site_key");
+const API_BASE_URL = String(import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/+$/, "");
+const CONTACT_API_URL = API_BASE_URL ? `${API_BASE_URL}/api/contact` : "/api/contact";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -96,7 +98,7 @@ const ContactForm = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
