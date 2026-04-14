@@ -93,6 +93,10 @@ const contactRateLimiter = rateLimit({
   message: { message: "Too many requests, please try again later" },
 });
 
+app.get("/", (req, res) => {
+  res.status(200).send("Hello from the backend!");
+});
+
 app.post("/contact", contactRateLimiter, async (req, res) => {
   const { name, email, message } = req.body;
 
