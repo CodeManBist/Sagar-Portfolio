@@ -14,6 +14,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CONTACT_EMAIL = process.env.EMAIL;
 const CONTACT_EMAIL_PASSWORD = process.env.PASSWORD;
+const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
+const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
+const SMTP_SECURE = process.env.SMTP_SECURE === "true" || SMTP_PORT === 465;
 const normalizeOrigin = (value) => value.trim().replace(/\/+$/, "").toLowerCase();
 const allowedOrigins = new Set(
   (process.env.FRONTEND_ORIGINS || "")
@@ -55,9 +58,10 @@ const validateContactPayload = ({ name, email, message }) => {
 };
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  host: SMTP_HOST,
+  port: SMTP_PORT,
+  secure: SMTP_SECURE,
+  requireTLS: !SMTP_SECURE,
   family: 4,
   connectionTimeout: 10000,
   greetingTimeout: 10000,
@@ -137,7 +141,7 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
     const normalizedMessage = message.trim();
 
     await transporter.sendMail({
-      from: CONTACT_EMAIL,
+      from: `Portfolio Contact <${CONTACT_EMAIL}>`,
       replyTo: normalizedEmail,
       to: CONTACT_EMAIL,
       subject: "New Contact Message",
@@ -151,13 +155,27 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
     res.status(200).json({ message: "Message sent successfully" });
 
   } catch (error) {
+    const errorCode = error?.code || "UNKNOWN";
+    const responseCode = error?.responseCode;
+
     console.error("Contact form sendMail failed:", {
       name: error?.name,
       message: error?.message,
-      code: error?.code,
-      responseCode: error?.responseCode,
+      code: errorCode,
+      responseCode,
       command: error?.command,
     });
+
+    if (errorCode === "EAUTH" || responseCode === 535) {
+      res.status(500).json({ message: "Email authentication failed on server" });
+      return;
+    }
+
+    if (errorCode === "ECONNECTION" || errorCode === "ETIMEDOUT" || errorCode === "ESOCKET") {
+      res.status(502).json({ message: "Email service connection failed" });
+      return;
+    }
+
     res.status(500).json({ message: "Error sending message" });
   }
 });
