@@ -1,6 +1,5 @@
 import express from "express";
-import nodemailer from "nodemailer";
-import dns from "dns";
+import { Resend } from "resend";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -8,15 +7,11 @@ import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
-dns.setDefaultResultOrder("ipv4first");
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 const CONTACT_EMAIL = process.env.EMAIL;
-const CONTACT_EMAIL_PASSWORD = process.env.PASSWORD;
-const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
-const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
-const SMTP_SECURE = process.env.SMTP_SECURE === "true" || SMTP_PORT === 465;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const resend = new Resend(RESEND_API_KEY);
 const normalizeOrigin = (value) => value.trim().replace(/\/+$/, "").toLowerCase();
 const allowedOrigins = new Set(
   (process.env.FRONTEND_ORIGINS || "")
@@ -56,21 +51,6 @@ const validateContactPayload = ({ name, email, message }) => {
 
   return null;
 };
-
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT,
-  secure: SMTP_SECURE,
-  requireTLS: !SMTP_SECURE,
-  family: 4,
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-  auth: {
-    user: CONTACT_EMAIL,
-    pass: CONTACT_EMAIL_PASSWORD,
-  },
-});
 
 app.disable("x-powered-by");
 
@@ -130,7 +110,7 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
     return;
   }
 
-  if (!CONTACT_EMAIL || !CONTACT_EMAIL_PASSWORD) {
+  if (!CONTACT_EMAIL || !RESEND_API_KEY) {
     res.status(500).json({ message: "Email service is not configured" });
     return;
   }
@@ -140,9 +120,8 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
     const normalizedEmail = email.trim();
     const normalizedMessage = message.trim();
 
-    await transporter.sendMail({
-      from: `Portfolio Contact <${CONTACT_EMAIL}>`,
-      replyTo: normalizedEmail,
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: CONTACT_EMAIL,
       subject: "New Contact Message",
       text: `
@@ -150,32 +129,18 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
         Email: ${normalizedEmail}
         Message: ${normalizedMessage}
       `,
+      replyTo: normalizedEmail,
     });
 
     res.status(200).json({ message: "Message sent successfully" });
 
   } catch (error) {
-    const errorCode = error?.code || "UNKNOWN";
-    const responseCode = error?.responseCode;
-
     console.error("Contact form sendMail failed:", {
       name: error?.name,
       message: error?.message,
-      code: errorCode,
-      responseCode,
-      command: error?.command,
+      code: error?.code,
+      statusCode: error?.statusCode,
     });
-
-    if (errorCode === "EAUTH" || responseCode === 535) {
-      res.status(500).json({ message: "Email authentication failed on server" });
-      return;
-    }
-
-    if (errorCode === "ECONNECTION" || errorCode === "ETIMEDOUT" || errorCode === "ESOCKET") {
-      res.status(502).json({ message: "Email service connection failed" });
-      return;
-    }
-
     res.status(500).json({ message: "Error sending message" });
   }
 });
