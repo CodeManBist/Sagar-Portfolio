@@ -14,10 +14,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CONTACT_EMAIL = process.env.EMAIL;
 const CONTACT_EMAIL_PASSWORD = process.env.PASSWORD;
-const allowedOrigins = (process.env.FRONTEND_ORIGINS || "")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+const normalizeOrigin = (value) => value.trim().replace(/\/+$/, "").toLowerCase();
+const allowedOrigins = new Set(
+  (process.env.FRONTEND_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+    .map(normalizeOrigin)
+);
+const allowVercelPreview = process.env.ALLOW_VERCEL_PREVIEW === "true";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -73,24 +78,30 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin) {
-        callback(null, true);
-        return;
-      }
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
+    const normalizedOrigin = normalizeOrigin(origin);
+    const isAllowedVercelPreview =
+      allowVercelPreview && /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(normalizedOrigin);
 
-      callback(new Error("Not allowed by CORS"));
-    },
-    methods: ["POST"],
-  })
-);
+    if (allowedOrigins.has(normalizedOrigin) || isAllowedVercelPreview) {
+      callback(null, true);
+      return;
+    }
+
+    console.warn("CORS blocked origin:", origin);
+    callback(new Error("Not allowed by CORS"));
+  },
+  methods: ["GET", "POST", "OPTIONS"],
+};
+
+app.options(/.*/, cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: "10kb" }));
 
