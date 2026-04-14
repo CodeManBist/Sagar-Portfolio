@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 const ContactSection = () => {
   const [form, setForm] = useState({
     name: "",
@@ -16,15 +18,41 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    };
+
+    if (!payload.name || !payload.email || !payload.message) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    if (payload.name.length > 100 || payload.message.length > 2000) {
+      toast.error("Input is too long");
+      return;
+    }
+
+    if (
+      import.meta.env.PROD &&
+      !API_BASE_URL.startsWith("https://") &&
+      !API_BASE_URL.startsWith("/")
+    ) {
+      toast.error("Invalid production API configuration");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/contact", {
+      const res = await fetch(`${API_BASE_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -92,6 +120,7 @@ const ContactSection = () => {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
+                  maxLength={100}
                   required
                   className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/10 text-white 
                   outline-none transition focus:border-purple-400 focus:ring-1 focus:ring-purple-400"
@@ -105,6 +134,7 @@ const ContactSection = () => {
                   type="email"
                   value={form.email}
                   onChange={handleChange}
+                  maxLength={254}
                   required
                   className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/10 text-white 
                   outline-none transition focus:border-purple-400 focus:ring-1 focus:ring-purple-400"
@@ -118,6 +148,7 @@ const ContactSection = () => {
                   rows="5"
                   value={form.message}
                   onChange={handleChange}
+                  maxLength={2000}
                   required
                   className="w-full px-4 py-3 rounded-md bg-white/5 border border-white/10 text-white 
                   outline-none transition focus:border-purple-400 focus:ring-1 focus:ring-purple-400"
