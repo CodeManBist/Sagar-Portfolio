@@ -1,11 +1,14 @@
 import express from "express";
 import nodemailer from "nodemailer";
+import dns from "dns";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 
 dotenv.config();
+
+dns.setDefaultResultOrder("ipv4first");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -47,7 +50,10 @@ const validateContactPayload = ({ name, email, message }) => {
 };
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  family: 4,
   auth: {
     user: CONTACT_EMAIL,
     pass: CONTACT_EMAIL_PASSWORD,
@@ -93,7 +99,7 @@ const contactRateLimiter = rateLimit({
   message: { message: "Too many requests, please try again later" },
 });
 
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
   res.status(200).send("Hello from the backend!");
 });
 
