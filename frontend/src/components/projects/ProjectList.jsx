@@ -50,7 +50,7 @@ const projects = [
 
 const ProjectsList = () => {
   return (
-    <section className="py-20 md:py-28 bg-[#0d0d0d]">
+    <section className="py-24 bg-[#0d0d0d]">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 space-y-20">
 
         {projects.map((project, i) => (

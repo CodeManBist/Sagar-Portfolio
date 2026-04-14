@@ -3,6 +3,7 @@ import Navbar from '../components/common/Navbar'
 import Footer from '../components/common/Footer'
 import Hero from '../components/projects/Hero'
 import ProjectsList from '../components/projects/ProjectList'
+import CTA from '../components/projects/CTA'
 
 const Projects = () => {
   return (
@@ -10,6 +11,7 @@ const Projects = () => {
         <Navbar />
         <Hero />
         <ProjectsList />
+        <CTA />
         <Footer />
     </>
   )

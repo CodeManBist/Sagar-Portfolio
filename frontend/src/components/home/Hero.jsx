@@ -30,19 +30,19 @@ const Hero = () => {
           </p>
 
           {/* Buttons */}
-          <div className="flex items-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
 
-            {/* Primary */}
-            <button className="px-6 py-3 rounded-md bg-white text-black transition-all duration-200 
-            hover:bg-neutral-200 hover:-translate-y-1 hover:shadow-lg">
-              View Work
-            </button>
+          {/* Primary */}
+          <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black 
+            transition-all duration-200 hover:bg-neutral-200 hover:-translate-y-1 hover:shadow-lg">
+            View Work
+          </button>
 
-            {/* Secondary */}
-            <button className="px-6 py-3 rounded-md border border-white/10 text-white transition-all duration-200 
-            hover:bg-white/5 hover:-translate-y-1">
-              Contact Me
-            </button>
+          {/* Secondary */}
+          <button className="w-full sm:w-auto px-6 py-3 rounded-md border border-white/10 text-white 
+            transition-all duration-200 hover:bg-white/5 hover:-translate-y-1">
+          Contact Me
+          </button>
 
           </div>
 

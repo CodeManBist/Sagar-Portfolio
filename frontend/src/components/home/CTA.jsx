@@ -18,8 +18,8 @@ const CTA = () => {
           </p>
 
           {/* CTA */}
-          <div className="pt-4">
-            <button className="px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
+          <div className="pt-4 flex justify-center sm:block">
+            <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
               Contact Me
             </button>
           </div>
