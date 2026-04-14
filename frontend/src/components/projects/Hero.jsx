@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="relative py-20 md:py-24 bg-[#0d0d0d] border-b border-white/10 overflow-hidden">
+    <section className="relative py-24 bg-[#0d0d0d] border-b border-white/10 overflow-hidden">
 
       {/* 🔥 Background gradient (NOT blob) */}
       <div className="absolute inset-0">
