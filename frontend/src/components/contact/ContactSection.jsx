@@ -48,7 +48,7 @@ const ContactSection = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${VITE_API_BASE_URL}/contact`, {
+      const res = await fetch(`${API_BASE_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,10 @@ const ContactSection = () => {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      const data = contentType.includes("application/json")
+        ? await res.json()
+        : { message: await res.text() };
 
       if (res.ok) {
         toast.success("Message sent successfully 🚀");
@@ -66,6 +69,7 @@ const ContactSection = () => {
       }
 
     } catch (error) {
+      console.error("Contact form submit failed:", error);
       toast.error("Server error");
     }
 
