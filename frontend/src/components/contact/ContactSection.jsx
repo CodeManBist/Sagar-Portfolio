@@ -48,7 +48,7 @@ const ContactSection = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE_URL}/contact`, {
+      const res = await fetch(`${VITE_API_BASE_URL}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
