@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Section from "../common/Section";
 
 const CTA = () => {
@@ -6,11 +7,11 @@ const CTA = () => {
     <Section className="py-24 bg-[#0d0d0d] border-t border-white/10">
 
         {/* 🔥 Card-style CTA (different from home) */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-10 md:p-14 text-center">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/2 p-10 md:p-14 text-center">
 
           {/* Subtle glow */}
           <div className="absolute inset-0 flex justify-center">
-            <div className="w-[400px] h-[200px] bg-purple-500/20 blur-3xl opacity-30" />
+            <div className="w-100 h-50 bg-purple-500/20 blur-3xl opacity-30" />
           </div>
 
           <div className="relative space-y-6 max-w-2xl mx-auto">
@@ -32,9 +33,9 @@ const CTA = () => {
 
             {/* CTA Button */}
             <div className="pt-4 flex justify-center sm:block">
-              <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition">
+              <Link to="/contact" className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition text-center inline-block">
                 Start a Project
-              </button>
+              </Link>
             </div>
 
           </div>

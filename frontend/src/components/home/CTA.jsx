@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Section from "../common/Section";
 
 const CTA = () => {
@@ -19,9 +20,9 @@ const CTA = () => {
 
           {/* CTA */}
           <div className="pt-4 flex justify-center sm:block">
-            <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
+            <Link to="/contact" className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer text-center inline-block">
               Contact Me
-            </button>
+            </Link>
           </div>
 
         </div>

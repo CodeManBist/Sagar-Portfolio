@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Section from "../common/Section";
 
 const Hero = () => {
@@ -17,7 +18,7 @@ const Hero = () => {
             Building clean &{" "}
             <span className="relative inline-block">
               scalable
-              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
             </span>
             <br />
             web applications.
@@ -33,16 +34,16 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
 
           {/* Primary */}
-          <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black 
-            transition-all duration-200 hover:bg-neutral-200 hover:-translate-y-1 hover:shadow-lg">
+          <Link to="/projects" className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black 
+            transition-all duration-200 hover:bg-neutral-200 hover:-translate-y-1 hover:shadow-lg text-center">
             View Work
-          </button>
+          </Link>
 
           {/* Secondary */}
-          <button className="w-full sm:w-auto px-6 py-3 rounded-md border border-white/10 text-white 
-            transition-all duration-200 hover:bg-white/5 hover:-translate-y-1">
+          <Link to="/contact" className="w-full sm:w-auto px-6 py-3 rounded-md border border-white/10 text-white 
+            transition-all duration-200 hover:bg-white/5 hover:-translate-y-1 text-center">
           Contact Me
-          </button>
+          </Link>
 
           </div>
 

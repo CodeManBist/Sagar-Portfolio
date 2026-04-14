@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,9 +26,9 @@ const Navbar = () => {
         <nav className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 h-full flex items-center justify-between">
 
           {/* Logo */}
-          <p className="text-white font-semibold text-lg cursor-pointer">
+          <Link to="/" className="text-white font-semibold text-lg cursor-pointer">
             Sagar <span className="text-purple-500">&lt;/&gt;</span>
-          </p>
+          </Link>
 
           {/* Desktop */}
           <ul className="hidden md:flex gap-8 text-sm cursor-pointer">
@@ -41,9 +41,12 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <button className="hidden md:block px-4 py-2 text-sm rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
+          <Link
+            to="/contact"
+            className="hidden md:block px-4 py-2 text-sm rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer"
+          >
             Hire Me
-          </button>
+          </Link>
 
           {/* Mobile Button */}
           <div
@@ -57,7 +60,7 @@ const Navbar = () => {
 
       {/* ✅ CLEAN OVERLAY */}
       <div
-        className={`fixed inset-0 z-[90] bg-black/60 transition-opacity duration-200 ${
+        className={`fixed inset-0 z-90 bg-black/60 transition-opacity duration-200 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
@@ -65,7 +68,7 @@ const Navbar = () => {
 
       {/* ✅ CLEAN DRAWER */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[80%] max-w-[320px] z-[100]
+        className={`fixed top-0 right-0 h-screen w-[80%] max-w-[320px] z-100
         bg-[#0d0d0d] border-l border-white/10
         transform transition-transform duration-200
         ${isOpen ? "translate-x-0" : "translate-x-full"}`}
@@ -74,9 +77,9 @@ const Navbar = () => {
 
           {/* Top */}
           <div className="flex justify-between items-center border-b border-white/10 pb-3">
-            <p className="text-white font-semibold text-lg cursor-pointer">
+            <Link to="/" className="text-white font-semibold text-lg cursor-pointer">
               Sagar <span className="text-purple-500">&lt;/&gt;</span>
-            </p>
+            </Link>
 
             <FaTimes
               className="text-white/70 text-xl cursor-pointer hover:text-white"
@@ -100,9 +103,13 @@ const Navbar = () => {
           </ul>
 
           {/* CTA */}
-          <button className="mt-auto w-full py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
+          <Link
+            to="/contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-auto w-full py-3 rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer text-center"
+          >
             Hire Me
-          </button>
+          </Link>
 
         </div>
       </div>

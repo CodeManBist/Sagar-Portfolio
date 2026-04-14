@@ -1,5 +1,6 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,9 +12,9 @@ const Footer = () => {
 
           {/* Logo */}
           <div>
-            <p className="text-white font-semibold text-lg cursor-pointer">
+            <Link to="/" className="text-white font-semibold text-lg cursor-pointer">
               Sagar <span className="text-purple-500">&lt;/&gt;</span>
-            </p>
+            </Link>
             <p className="text-[#71717a] text-sm mt-3 max-w-xs">
               Full-stack developer building clean and scalable web apps.
             </p>

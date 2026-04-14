@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Section from "../common/Section";
 
 const CTA = () => {
@@ -28,18 +29,18 @@ const CTA = () => {
           {/* RIGHT ACTION */}
           <div className="flex flex-col sm:flex-row gap-3">
 
-            <button className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black 
+            <Link to="/contact" className="w-full sm:w-auto px-6 py-3 rounded-md bg-white text-black 
             transition-all duration-200 
             hover:bg-neutral-200 hover:-translate-y-1 
-            hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+            hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] text-center inline-block">
               Contact Me
-            </button>
+            </Link>
 
-            <button className="w-full sm:w-auto px-6 py-3 rounded-md border border-white/10 text-white 
+            <Link to="/projects" className="w-full sm:w-auto px-6 py-3 rounded-md border border-white/10 text-white 
             transition-all duration-200 
-            hover:bg-white/5 hover:-translate-y-1">
+            hover:bg-white/5 hover:-translate-y-1 text-center inline-block">
               View Work
-            </button>
+            </Link>
 
           </div>
 
