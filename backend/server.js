@@ -54,6 +54,9 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   family: 4,
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
   auth: {
     user: CONTACT_EMAIL,
     pass: CONTACT_EMAIL_PASSWORD,
