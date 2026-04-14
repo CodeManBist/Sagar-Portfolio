@@ -127,6 +127,13 @@ app.post("/contact", contactRateLimiter, async (req, res) => {
     res.status(200).json({ message: "Message sent successfully" });
 
   } catch (error) {
+    console.error("Contact form sendMail failed:", {
+      name: error?.name,
+      message: error?.message,
+      code: error?.code,
+      responseCode: error?.responseCode,
+      command: error?.command,
+    });
     res.status(500).json({ message: "Error sending message" });
   }
 });
