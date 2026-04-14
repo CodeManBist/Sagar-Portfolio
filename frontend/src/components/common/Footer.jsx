@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#0d0d0d] border-t border-white/10 mt-20">
+    <footer className="w-full bg-[#0d0d0d] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-12">
 
         {/* Top */}
@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-10 pt-6 border-t border-white/10 text-sm text-[#71717a] flex justify-between">
+        <div className="mt-10 pt-6 text-sm text-[#71717a] flex justify-between">
           <p>© {new Date().getFullYear()} Sagar</p>
           <p>Designed & developed by Sagar using React & Tailwind CSS</p>
         </div>
