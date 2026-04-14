@@ -3,6 +3,7 @@ import Navbar from '../components/common/Navbar'
 import Footer from '../components/common/Footer'
 import Hero from '../components/services/Hero'
 import ServicesGrid from '../components/services/ServicesGrid'
+import Process from '../components/services/Process'
 
 const Services = () => {
 	return (
@@ -10,6 +11,7 @@ const Services = () => {
 			<Navbar />
 			<Hero />
 			<ServicesGrid />
+			<Process />
 			<Footer />
 		</>
 	)
