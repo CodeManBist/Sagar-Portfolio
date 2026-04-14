@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCode, FaServer, FaLayerGroup, FaCloud } from "react-icons/fa";
 import Section from "../common/Section";
+import SectionHeading from "../common/SectionHeading";
 
 const services = [
   {
@@ -30,19 +31,12 @@ const Services = () => {
     <Section className="py-24 md:py-28 bg-[#0d0d0d]">
 
         {/* Heading */}
-        <div className="max-w-2xl mb-12 space-y-4">
-          <p className="text-purple-500 text-sm tracking-wide">
-            Services
-          </p>
-
-          <h2 className="text-3xl md:text-5xl font-semibold text-white">
-            What I Do
-          </h2>
-
-          <p className="text-[#a1a1aa]">
-            I build scalable, high-performance web applications with clean UI and modern technologies.
-          </p>
-        </div>
+        <SectionHeading
+          className="max-w-2xl mb-12 space-y-4"
+          eyebrow="Services"
+          title="What I Do"
+          description="I build scalable, high-performance web applications with clean UI and modern technologies."
+        />
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

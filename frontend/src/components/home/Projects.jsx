@@ -1,6 +1,7 @@
 import React from "react";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import Section from "../common/Section";
+import SectionHeading from "../common/SectionHeading";
 
 const projects = [
   {
@@ -24,19 +25,12 @@ const Projects = () => {
     <Section className="bg-[#0d0d0d]">
 
         {/* Heading */}
-        <div className="max-w-2xl mb-12 space-y-4">
-          <p className="text-purple-500 text-sm tracking-wide">
-            Projects
-          </p>
-
-          <h2 className="text-3xl md:text-5xl font-semibold text-white">
-            Selected Work
-          </h2>
-
-          <p className="text-[#a1a1aa]">
-            A collection of projects showcasing my skills in building scalable and modern web applications.
-          </p>
-        </div>
+        <SectionHeading
+          className="max-w-2xl mb-12 space-y-4"
+          eyebrow="Projects"
+          title="Selected Work"
+          description="A collection of projects showcasing my skills in building scalable and modern web applications."
+        />
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

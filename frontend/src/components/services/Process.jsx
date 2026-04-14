@@ -1,5 +1,6 @@
 import React from "react";
 import Section from "../common/Section";
+import SectionHeading from "../common/SectionHeading";
 
 const steps = [
   {
@@ -25,19 +26,13 @@ const Process = () => {
     <Section className="py-20 md:py-24 bg-[#0d0d0d] border-t border-white/10">
 
         {/* Heading */}
-        <div className="max-w-2xl mb-16 space-y-4">
-          <p className="text-purple-400 text-sm tracking-wide">
-            Process
-          </p>
-
-          <h2 className="text-3xl md:text-5xl font-semibold text-white">
-            How I Work
-          </h2>
-
-          <p className="text-[#a1a1aa]">
-            A simple and structured process to deliver high-quality results efficiently.
-          </p>
-        </div>
+        <SectionHeading
+          className="max-w-2xl mb-16 space-y-4"
+          eyebrow="Process"
+          title="How I Work"
+          description="A simple and structured process to deliver high-quality results efficiently."
+          eyebrowClassName="text-purple-400 text-sm tracking-wide"
+        />
 
         {/* 🔥 Steps */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
