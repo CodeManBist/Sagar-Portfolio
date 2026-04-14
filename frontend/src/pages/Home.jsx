@@ -6,6 +6,7 @@ import TrustBar from '../components/home/TrustBar'
 import Services from '../components/home/Services'
 import Projects from '../components/home/Projects'
 import Testimonials from '../components/home/Testimonials'
+import CTA from '../components/home/CTA'
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         <Services />
         <Projects />
         <Testimonials />
+        <CTA />
         <Footer />
     </>
   )
