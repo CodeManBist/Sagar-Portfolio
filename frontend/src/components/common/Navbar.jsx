@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { label: "Home", to: "/" },
+    { label: "Projects", to: "/projects" },
+    { label: "Services", to: "/services" },
+    { label: "Contact", to: "/contact" },
+  ];
+
+  const navClassName = ({ isActive }) =>
+    `transition ${isActive ? "text-white" : "text-white/70 hover:text-white"}`;
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -20,11 +31,14 @@ const Navbar = () => {
           </p>
 
           {/* Desktop */}
-          <ul className="hidden md:flex gap-8 text-sm text-white/70 cursor-pointer">
-            <li><a className="hover:text-white transition">Home</a></li>
-            <li><a className="hover:text-white transition">Work</a></li>
-            <li><a className="hover:text-white transition">Services</a></li>
-            <li><a className="hover:text-white transition">Contact</a></li>
+          <ul className="hidden md:flex gap-8 text-sm cursor-pointer">
+            {navLinks.map((item) => (
+              <li key={item.to}>
+                <NavLink className={navClassName} to={item.to}>
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
 
           <button className="hidden md:block px-4 py-2 text-sm rounded-md bg-white text-black hover:bg-neutral-200 transition cursor-pointer">
@@ -71,11 +85,18 @@ const Navbar = () => {
           </div>
 
           {/* Links */}
-          <ul className="mt-7 space-y-5 text-white/70 text-base cursor-pointer">
-            <li><a className="hover:text-white">Home</a></li>
-            <li><a className="hover:text-white">Work</a></li>
-            <li><a className="hover:text-white">Services</a></li>
-            <li><a className="hover:text-white">Contact</a></li>
+          <ul className="mt-7 space-y-5 text-base cursor-pointer">
+            {navLinks.map((item) => (
+              <li key={`mobile-${item.to}`}>
+                <NavLink
+                  className={navClassName}
+                  to={item.to}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
 
           {/* CTA */}
