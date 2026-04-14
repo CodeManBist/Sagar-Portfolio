@@ -1,5 +1,22 @@
+/* Tailwind CSS import */
 @import "tailwindcss";
+
+/* Global styles */
 
 body {
   background-color: #09090b;
+}
+
+/* Trustbar aanimation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }
