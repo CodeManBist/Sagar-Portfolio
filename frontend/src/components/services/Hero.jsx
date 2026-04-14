@@ -1,10 +1,9 @@
 import React from "react";
+import Section from "../common/Section";
 
 const Hero = () => {
   return (
-    <section className="py-20 md:py-24 bg-[#0d0d0d] border-b border-white/10">
-
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-20 md:py-24 bg-[#0d0d0d] border-b border-white/10">
 
         <div className="max-w-3xl mx-auto text-center space-y-6">
 
@@ -48,9 +47,7 @@ const Hero = () => {
 
         </div>
 
-      </div>
-
-    </section>
+    </Section>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import Section from "../common/Section";
 
 const projects = [
   {
@@ -20,8 +21,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section className="bg-[#0d0d0d]">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="bg-[#0d0d0d]">
 
         {/* Heading */}
         <div className="max-w-2xl mb-12 space-y-4">
@@ -97,8 +97,7 @@ const Projects = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 

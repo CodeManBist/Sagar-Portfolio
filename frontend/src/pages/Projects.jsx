@@ -1,19 +1,16 @@
 import React from 'react'
-import Navbar from '../components/common/Navbar'
-import Footer from '../components/common/Footer'
+import PageLayout from '../components/common/PageLayout'
 import Hero from '../components/projects/Hero'
 import ProjectsList from '../components/projects/ProjectList'
 import CTA from '../components/projects/CTA'
 
 const Projects = () => {
   return (
-    <>
-        <Navbar />
+    <PageLayout>
         <Hero />
         <ProjectsList />
         <CTA />
-        <Footer />
-    </>
+    </PageLayout>
   )
 }
 

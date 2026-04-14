@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Section from "../common/Section";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
@@ -72,8 +73,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-20 md:py-24 bg-[#0d0d0d]">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-20 md:py-24 bg-[#0d0d0d]">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
 
@@ -171,8 +171,7 @@ const ContactSection = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 

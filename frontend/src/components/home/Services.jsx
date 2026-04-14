@@ -1,5 +1,6 @@
 import React from "react";
 import { FaCode, FaServer, FaLayerGroup, FaCloud } from "react-icons/fa";
+import Section from "../common/Section";
 
 const services = [
   {
@@ -26,8 +27,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-24 md:py-28 bg-[#0d0d0d]">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-24 md:py-28 bg-[#0d0d0d]">
 
         {/* Heading */}
         <div className="max-w-2xl mb-12 space-y-4">
@@ -79,8 +79,7 @@ const Services = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import Section from "../common/Section";
 
 const testimonials = [
   {
@@ -18,8 +19,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-[#0d0d0d]">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-24 bg-[#0d0d0d]">
 
         {/* Heading */}
         <div className="max-w-2xl mb-12 space-y-4">
@@ -74,8 +74,7 @@ const Testimonials = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 

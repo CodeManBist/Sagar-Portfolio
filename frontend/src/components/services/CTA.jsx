@@ -1,9 +1,9 @@
 import React from "react";
+import Section from "../common/Section";
 
 const CTA = () => {
   return (
-    <section className="py-20 md:py-24 bg-[#0d0d0d] border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-20 md:py-24 bg-[#0d0d0d] border-t border-white/10">
 
         {/* 🔥 Split Layout */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -45,8 +45,7 @@ const CTA = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { FaReact, FaNodeJs, FaAws } from "react-icons/fa";
 import { SiMongodb, SiTailwindcss } from "react-icons/si";
+import Section from "../common/Section";
 
 const icons = [
   { icon: <FaReact />, name: "React" },
@@ -12,8 +13,7 @@ const icons = [
 
 const TrustBar = () => {
   return (
-    <section className="py-10 md:py-12 bg-[#0d0d0d] border-y border-white/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <Section className="py-10 md:py-12 bg-[#0d0d0d] border-y border-white/10 overflow-hidden">
 
         <div className="relative overflow-hidden">
 
@@ -45,8 +45,7 @@ const TrustBar = () => {
 
         </div>
 
-      </div>
-    </section>
+    </Section>
   );
 };
 
