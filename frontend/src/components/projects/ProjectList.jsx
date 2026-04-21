@@ -4,15 +4,15 @@ import Section from "../common/Section";
 
 const projects = [
   {
-    title: "Movie Web App",
-    desc: "Full-stack movie platform with authentication and real-time search.",
-    problem: "Users needed a fast and clean interface to browse movies.",
-    solution: "Built optimized APIs with debounced search and responsive UI.",
-    result: "Improved performance and user engagement significantly.",
-    tech: ["React", "Node.js", "MongoDB"],
-    image: "/image1.jpg",
-    live: "#",
-    code: "#",
+    title: "Code_Hub",
+    desc: "A simplified Git-like version control system built with Node.js that supports commands like init, add, commit, status, push, pull, and revert to demonstrate how tools like Git work internally.",
+    problem: "Need a simple and effective version control solution for developers.",
+    solution: "Built a lightweight version control system with a user-friendly interface.",
+    result: "Improved code management and collaboration among developers.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    image: "/project3.png",
+    live: "https://code-hub-taupe.vercel.app",
+    code: "https://github.com/CodeManBist/Code_Hub.git",
   },
   {
     title: "Portfolio Website",
@@ -21,9 +21,9 @@ const projects = [
     solution: "Designed minimal UI with Tailwind and optimized assets.",
     result: "Better recruiter engagement and faster load time.",
     tech: ["React", "Tailwind"],
-    image: "/image2.jpg",
-    live: "#",
-    code: "#",
+    image: "/project1.png",
+    live: "https://sagar-portfolio-vedv.vercel.app/",
+    code: "https://github.com/CodeManBist/Sagar-Portfolio.git",
   },
   {
     title: "Rentsphere",
@@ -32,20 +32,9 @@ const projects = [
     solution: "Developed a seamless property listing and application portal with automated communication features.",
     result: "Streamlined the rental workflow, reducing vacancy periods and improving user satisfaction.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: "/image3.jpg",
-    live: "https://rentsphere.vercel.app/", // replace with your actual live demo URL if different
+    image: "/project2.png",
+    live: "https://project1-2tfo.onrender.com/listings", // replace with your actual live demo URL if different
     code: "https://github.com/CodeManBist/rentsphere",
-  },
-  {
-    title: "Codehub",
-    desc: "A developer community platform for sharing code snippets, projects, and feedback.",
-    problem: "Developers lacked a central hub for collaboration and discovering reusable code components.",
-    solution: "Built an interactive platform with code upload, search, and comment features.",
-    result: "Fostered a growing community and sped up dev workflows by encouraging code sharing.",
-    tech: ["Next.js", "Prisma", "PostgreSQL", "TailwindCSS"],
-    image: "/image4.jpg",
-    live: "https://codehub-one.vercel.app/", // replace with your actual live demo URL if different
-    code: "https://github.com/CodeManBist/codehub",
   },
 ];
 

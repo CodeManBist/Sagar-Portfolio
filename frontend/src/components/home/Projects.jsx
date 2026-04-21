@@ -5,18 +5,18 @@ import SectionHeading from "../common/SectionHeading";
 
 const projects = [
   {
-    title: "Movie Web App",
-    desc: "A full-stack movie platform with authentication, search, and dynamic UI using React and Node.js.",
-    tech: ["React", "Node.js", "MongoDB"],
-    live: "#",
-    code: "#",
+    title: "Code_Hub",
+    desc: "A simplified Git-like version control system built with Node.js that supports commands like init, add, commit, status, push, pull, and revert to demonstrate how tools like Git work internally.",
+    tech: ["React", "Node.js","Express", "MongoDB"],
+    live: "https://code-hub-taupe.vercel.app",
+    code: "https://github.com/CodeManBist/Code_Hub.git",
   },
   {
     title: "Portfolio Website",
     desc: "Modern personal portfolio with responsive design, animations, and clean UI.",
     tech: ["React", "Tailwind"],
-    live: "#",
-    code: "#",
+    live: "https://sagar-portfolio-vedv.vercel.app/",
+    code: "https://github.com/CodeManBist/Sagar-Portfolio.git",
   },
 ];
 
